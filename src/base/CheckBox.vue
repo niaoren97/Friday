@@ -8,7 +8,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-@import '~assets/style/vars.styl'
+@import '../assets/style/vars.styl'
 .box
   width 16px
   height 16px
