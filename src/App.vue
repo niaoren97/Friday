@@ -1,12 +1,24 @@
-<template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+<template lang="pug">
+#app
+  header-bar
+  header-section
+  router-view
+  footer-section
 </template>
+<script>
+import HeaderBar from '@/components/HeaderBar'
+import FooterSection from '@/components/FooterSection'
+import HeaderSection from '@/components/HeaderSection'
+
+export default {
+  components: {
+    HeaderBar,
+    HeaderSection,
+    FooterSection,
+  }
+}
+</script>
+
 <style lang="stylus">
 #app
   font-family 'Avenir', Helvetica, Arial, sans-serif
