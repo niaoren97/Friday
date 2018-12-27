@@ -1,0 +1,44 @@
+@import './vars.styl'
+
+*
+  box-sizing border-box
+
+html, body
+  margin 0
+  padding 0
+
+.clearfix::after, .clearfix::before
+  content ' ' /* Older browser do not support empty content */
+  visibility hidden
+  display block
+  height 0
+  clear both
+
+.fl
+  float left
+.fr
+  float right
+
+.col-6
+  width 50%
+.col-3
+  width 25%
+.col-4
+  width 33.3333333333%
+
+.content
+  width 1280px
+
+button
+  border-radius 5px
+  color #fff
+  border none
+  height 45px
+  &.primary
+    background-color $primary
+    &:focus
+      outline solid 2px #44D52B
+  &.secondary
+    background-color $secondary
+    &:focus
+      outline solid 2px #f09227

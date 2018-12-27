@@ -5,6 +5,8 @@ import store from './store'
 import registrator from './plugins/registrator'
 import './registerServiceWorker'
 
+import './assets/style/style.styl'
+
 Vue.config.productionTip = false
 Vue.use(registrator)
 
