@@ -15,6 +15,9 @@ import UserCenter from '@/views/UserCenter'
 
 import NotFoundView from '@/views/404.vue'
 
+// test路由
+import NavBar from '@/components/NavBar.vue'
+
 Vue.use(Router)
 
 // {
@@ -36,6 +39,9 @@ export default new Router({
       name: 'home',
       component: HomeView,
     },
+    // test路由接口
+    { path: '/n', component:NavBar},
+
     { path: '/login', name: 'login', component: EntryView },
     { path: '/signup', name: 'signup', component: EntryView },
     { path: '/retrieve-password', component: EntryView },
@@ -60,5 +66,7 @@ export default new Router({
     // 关于礼拜五
     { path: '/about', component: AboutView },
     { path: '*', component: NotFoundView },
+
+    
   ],
 })

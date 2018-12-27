@@ -10,7 +10,7 @@ import './assets/style/style.styl'
 Vue.config.productionTip = false
 Vue.use(registrator)
 
-new Vue({
+new Vue({  
   router,
   store,
   render: (h) => h(App),
