@@ -16,7 +16,8 @@ import UserCenter from '@/views/UserCenter'
 import NotFoundView from '@/views/404.vue'
 
 // test路由
-import NavBar from '@/base/NavBar.vue'
+// import NavBar from '@/base/NavBar.vue'
+import RetrievePasswordCard from '@/components/entry/RetrievePasswordCard.vue'
 
 Vue.use(Router)
 
@@ -31,7 +32,7 @@ export default new Router({
       component: HomeView,
     },
     // test路由接口
-    { path: '/n', component:NavBar},
+    { path: '/r', component:RetrievePasswordCard},
 
     { path: '/login', name: 'login', component: EntryView },
     { path: '/signup', name: 'signup', component: EntryView },
