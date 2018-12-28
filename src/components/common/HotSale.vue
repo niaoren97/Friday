@@ -1,5 +1,5 @@
 <template lang='pug'>
-.container
+.container(:class="myhot")
   .hot
     .left
       .title {{product.title}}
@@ -12,14 +12,15 @@ data(){
   return {
     product: {title:'呢蒙古草原',description:'羔羊羊精肉',images:['/static/goods/item1.png']}
   }
-}
+},
+props:['myhot']
 }
 </script>
 <style lang='stylus'scoped>
 .hot
   overflow hidden
   width 305px
-  height 105px
+  height 140px
   background-color #f2f2f2
   font-size 20px
   color #595959

@@ -16,21 +16,21 @@
       //- <div class="swiper-scrollbar"   slot="scrollbar"></div>
 
       //- 中间礼拜五特价商品
-    .content
-      .hot
-        HotSale(class="item")
-        HotSale(class="item")
-        HotSale(class="item")
-        HotSale(class="item")
-      .product
-        Product(class="item")
-        Product(class="item")
-        Product(class="item")
-        Product(class="item")
+  .content
+    .hot
+      hot-sale(myhot="myhot")
+      hot-sale(myhot="myhot")
+      hot-sale(myhot="myhot")
+      hot-sale(myhot="myhot")
+    //- 倒计时
+    count-down
+    .product
+      product(v-for="item in products" :product="item" myclass="product-item")
 </template>
 <script>
-import HotSale from '@/components/common/HotSale.vue'
-import Product from '@/components/common/Product.vue'
+import HotSale from "@/components/common/HotSale.vue";
+import CountDown from "@/components/home/CountDown.vue";
+import Product from "@/components/common/Product.vue";
 export default {
   name: "Homeview",
   data() {
@@ -48,53 +48,91 @@ export default {
           { id: 2, src: "/static/goods/bigposter.png" },
           { id: 3, src: "/static/goods/bigposter.png" }
         ]
-      }
-    }
+      },
+      products: [
+        {
+          images: ["/static/goods/i1.png"],
+          title: "新西兰黄金奇异果",
+          number: 6,
+          currentPrice: 28.8
+        },
+        {
+          images: ["/static/goods/i4.png"],
+          title: "新西兰黄金奇异果",
+          number: 6,
+          currentPrice: 28.8
+        },
+        {
+          images: ["/static/goods/i1.png"],
+          title: "新西兰黄金奇异果",
+          number: 6,
+          currentPrice: 28.8
+        },
+        {
+          images: ["/static/goods/i4.png"],
+          title: "新西兰黄金奇异果",
+          number: 6,
+          currentPrice: 28.8
+        }
+      ]
+    };
   },
-  components:{
+  components: {
     HotSale,
-    Product
+    Product,
+    CountDown
   },
   mounted() {
-  //   var mySwiper = new Swiper('.swiper-container',{
-  // pagination :{
-  //   el: '.swiper-pagination',
-  //   clickable :true,
-  // },
-  // navigation: {
-  //   nextEl: '.swiper-button-next',
-  //   prevEl: '.swiper-button-prev',
-  // },
-// })
+    //   var mySwiper = new Swiper('.swiper-container',{
+    // pagination :{
+    //   el: '.swiper-pagination',
+    //   clickable :true,
+    // },
+    // navigation: {
+    //   nextEl: '.swiper-button-next',
+    //   prevEl: '.swiper-button-prev',
+    // },
+    // })
   },
   computed: {
-      swiper() {
-        return this.$refs.mySwiper.swiper
-      }
-    },
-}
+    swiper() {
+      return this.$refs.mySwiper.swiper;
+    }
+  }
+};
 </script>
 <style lang="stylus" scoped>
-.container
+.content
+  margin auto
+
+.swiper-slide
   width 100vw
-.swiper-slide 
-  width 100vw
-.swiper-slide img 
+
+.swiper-slide img
   width 100vw
   height 500px
   // 热卖商品
-.hot 
-  margin 10px 5px
+
+.hot
+  margin 10px 0
   overflow hidden
-.hot .item
+  margin 22px auto
+.myhot:last-child 
+  margin-right  0
+.myhot
   float left
-  // 中间礼拜五特价商品
-.content
-  margin auto
+  margin-right 20px
+
+  // &:first-child
+  //   margin-left 10px
+
 .product
   overflow hidden
-  margin 10px 5px
-.product .item
-    float left 
-  // -----------------------------
+  margin 10px auto
+
+.product .product-item
+  float left
+  margin-right 20px
+.product-item:last-child
+  margin-right 0
 </style>

@@ -1,5 +1,5 @@
 <template lang='pug'>
-  .product
+  .product(:class='myclass')
     img(:src="product.images[0]")
     .title {{product.title}}
     .number {{product.number}}个装
@@ -11,14 +11,15 @@
 export default {
   data() {
     return {
-      product: {
-        images: ["/static/goods/i1.png"],
-        title: "新西兰黄金奇异果",
-        number: 6,
-        currentPrice: 28.8
-      }
+      // product: {
+      //   images: ["/static/goods/i1.png"],
+      //   title: "新西兰黄金奇异果",
+      //   number: 6,
+      //   currentPrice: 28.8
+      // }
     };
-  }
+  },
+  props:['product','myclass']
 };
 </script>
 <style lang='stylus'scoped>
@@ -32,6 +33,7 @@ export default {
 .product img
   width 305px
   height 305px
+  background-color #f8f6f7
 .title,.number 
   margin 5px 0
 .price 
