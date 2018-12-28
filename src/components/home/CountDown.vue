@@ -27,6 +27,7 @@ export default {};
   overflow hidden
   background-color #ebffe8
   padding  0 20px
+  border-bottom 1px solid #498e3d
 
 .left
   float left
