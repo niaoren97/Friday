@@ -30,8 +30,43 @@
         span 新鲜水果
         span 来自新疆优质水果生产基地,品质一流.
       .right
-        span 更多>>
-    product-classify(v-for="item in products" :product="item" myclass="product-classify")
+        span 更多&gt;&gt;
+    .display
+      product-classify(v-for="item in products" :product="item" myclass="product-classify")
+
+    .seafood 
+      .left 
+        img(src="/static/logo/seafood.png")
+        span 生猛海鲜
+        span 国内外新鲜到港的鱼虾蟹贝，我们全都有,品质一流.
+      .right
+        span 更多&gt;&gt;
+    .display
+      product-classify(v-for="item in products" :product="item" myclass="product-classify")
+
+    .meat 
+      .left 
+        img(src="/static/logo/meat.png")
+        span 肉类禽蛋
+        span 国内外新鲜到港的鱼虾蟹贝，我们全都有,品质一流.
+      .right
+        span 更多&gt;&gt;
+    .display
+      product-classify(v-for="item in products" :product="item" myclass="product-classify")
+    .egg 
+      .left 
+        img(src="/static/logo/egg.png")
+        span 蛋奶素食
+        span 国内外新鲜到港的鱼虾蟹贝，我们全都有,品质一流.
+      .right
+        span 更多&gt;&gt;
+    .display
+      product-classify(v-for="item in products" :product="item" myclass="product-classify")
+    
+    
+
+    
+    
 </template>
 <script>
 import HotSale from "@/components/common/HotSale.vue";
@@ -63,7 +98,8 @@ export default {
           number: 6,
           currentPrice: 28.8,
           description:"果肉绵密、花蜜般的甘甜百吃不厌",
-          price:66.66
+          original_price:66.66,
+          current_price:44.22
         },
         {
           images: ["/static/goods/i4.png"],
@@ -71,7 +107,8 @@ export default {
           number: 6,
           currentPrice: 28.8,
           description:"果肉绵密、花蜜般的甘甜百吃不厌",
-          price:66.66
+          original_price:66.66,
+          current_price:44.22
         },
         {
           images: ["/static/goods/i1.png"],
@@ -79,15 +116,17 @@ export default {
           number: 6,
           currentPrice: 28.8,
           description:"果肉绵密、花蜜般的甘甜百吃不厌",
-          price:66.66
+          original_price:66.66,
+          current_price:44.22
         },
         {
           images: ["/static/goods/i4.png"],
           title: "新西兰黄金奇异果",
-          number: 6,
+          number: 6,    
           currentPrice: 28.8,
           description:"果肉绵密、花蜜般的甘甜百吃不厌",
-          price:66.66
+          original_price:66.66,
+          current_price:44.22
         }
       ]
     };
@@ -153,7 +192,7 @@ export default {
   margin-right 0
 
 // 分类商品展示css
-.fruit
+.fruit,.seafood,.meat,.egg
   overflow hidden
   padding 0 20px
   background-color #ebffe8
@@ -180,6 +219,8 @@ export default {
     font-size 15px
     line-height 100px
     color #999999
+.display
+  overflow hidden
 .product-classify
   float left
   margin-right 20px

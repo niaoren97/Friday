@@ -2,8 +2,9 @@
 product-base(:product='product',:myclass="myclass")
   p(slot="description" class="description") {{product.description}}
   p(slot="foot" class='price') 
-    span $ {{product.price}}
-    span $ {{product.cut}}
+    span $ {{product.original_price}}
+    span $ {{product.current_price}}
+    img(src='/static/logo/cart2.png')
 //- <h1 slot="foot"></h1>
 </template>
 <script>
@@ -25,8 +26,20 @@ export default {
 </script>
 <style lang='stylus' scoped>
 .price
-  color #ff5757
-  font-size 16px
+  overflow hidden
+  span:nth-child(1)
+  float left
+    color #ff5757
+    font-size 20px
+    margin-right 20px
+  span:nth-child(2)
+    font-size 15px
+    color #8c8c8c
+    text-decoration line-through
+  img 
+    float right 
+    width 30px
+    height 30px
 .description
   color #666666
   font-size 15px

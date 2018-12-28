@@ -1,7 +1,8 @@
 <template lang='pug'>
 .navs
   span(@mouseover="show()" @mouseleave="hide()")
-    router-link(to="") 分类
+    router-link(to="") 分类 
+      img(src='/static/logo/jtx.png')
     ul(v-show="isShow")
       li(v-for="item in classify")
         img(:src="item.img")

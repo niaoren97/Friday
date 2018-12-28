@@ -19,8 +19,6 @@
 export default {};
 </script>
 <style lang='stylus'scoped>
-.container
-  width 100vw
 .countdown
   position relative
   height 100px
