@@ -16,19 +16,10 @@ import UserCenter from '@/views/UserCenter'
 import NotFoundView from '@/views/404.vue'
 
 // test路由
-import NavBar from '@/components/NavBar.vue'
+import NavBar from '@/base/NavBar.vue'
 
 Vue.use(Router)
 
-// {
-//   path: '/about',
-//   name: 'about',
-//   // route level code-splitting
-//   // this generates a separate chunk (about.[hash].js) for this route
-//   // which is lazy-loaded when the route is visited.
-//   component: () =>
-//     import(/* webpackChunkName: "about" */ './views/About.vue'),
-// },
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
