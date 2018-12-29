@@ -4,9 +4,9 @@
 李晓刚  前台应用
 ## base
 
-|--------|------|
-| ----   | ---- |
-| Navbar | y    | 
+| -------- | ------ |
+|----------|--------|
+| Navbar   | y      |
 
 ## components
 | HeaderBar   | y    |
@@ -15,6 +15,8 @@
 ### common
 | Product       | y    |
 | HotSale       | y    |
+| ProductClassify| y   |
+| ProductBase   | y |
 ## views
 
 | 名称         | 完成 |
@@ -22,3 +24,8 @@
 | AboutView    |      |
 | CategoryView |      |
 | HomeView     |      |
+
+## 后台
+
+
+| 后台完成30% | 12.29|

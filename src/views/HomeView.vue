@@ -63,10 +63,6 @@
     .display
       product-classify(v-for="item in products" :product="item" myclass="product-classify")
     
-    
-
-    
-    
 </template>
 <script>
 import HotSale from "@/components/common/HotSale.vue";
