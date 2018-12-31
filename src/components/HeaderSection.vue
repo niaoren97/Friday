@@ -2,9 +2,10 @@
 .container.content
   img(src="/static/logo/logo.png" class='logo')
   .center
-    input(type='text' placeholder="请输入关键字进行搜索")
-    span(class='search') 
-      img(src='/static/logo/fangdajing.png')
+    div
+      input(type='text' placeholder="请输入关键字进行搜索")
+      span(class='search') 
+        img(src='/static/logo/fangdajing.png')
     div(class='hot')
       span 热门: 奇异果  芒果  榴莲
   .right
@@ -46,7 +47,9 @@ export default {
       border 1px solid #4b943d
     .search
       display inline-block
+      box-sizing border-box
       width 40px
+      padding 0 10px
       height 40px
       line-height 40px
       background-color #4b943d

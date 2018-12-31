@@ -27,19 +27,19 @@
       span(v-text='codearm')
     //- 手机验证码-------------------------------
     .sjyanzhengma
-      input( type='text' placeholder='手机验证码',v-model='pcode' @input='arm5()', @blur='arm5()') 
-      span(class="getCode") 获取验证码
+      input( type='text' placeholder='手机验证码',v-model='pcode' @input='arm5()', @blur='arm5()')
+      span(class="getCode" @click='rand(),num()' ) 获取验证码
       p(class='arm')
         img(v-if="isShow5" src='/static/logo/alert.png')
         span(v-text='pcodearm')
 
     .agree
-      span(class='checkbox')
-        span(ref='check' class='check' v-if='check')
-      span(@click='toggle()') 我已阅读并同意《礼拜五用户协议》
-      check-box
-    button(class='btn1') 登录
-    button(class='btn2') 注册
+      label
+        check-box(:checked="isChecked" @click='tog()')
+        span 我已阅读并同意《礼拜五用户协议》
+    .btn
+      button(class='btn1') 登录
+      button(:class="{btn2:isAbled}" ) 注册
 </template>
 <script>
 import Verification from "@/components/common/Verification.vue";
@@ -47,14 +47,10 @@ import CheckBox from "@/base/CheckBox.vue";
 export default {
   name: "RetrievePasswordCard",
   components: { Verification, CheckBox },
-  // props:['code'],
-  methods: {
-    get(msg) {
-      this.mycode = msg;
-    }
-  },
   data() {
     return {
+      isAbled: false,
+      isChecked: false,
       code: "",
       mycode: "",
       codearm: "",
@@ -73,21 +69,21 @@ export default {
 
       pcode: "",
       pcodearm: "",
-      check: false
+      randNum: ""
     };
   },
   methods: {
     arm1() {
       if (this.phone === "") {
         this.phonearm = "手机号不能为空";
-        this.isShow = true;
+        this.isShow1 = true;
       } else if (this.phone !== "") {
         this.phonearm = "";
-        this.isShow = false;
+        this.isShow1 = false;
         var reg = /^1[3456789]\d{9}$/;
         if (!reg.test(this.phone)) {
           this.phonearm = "请输入正确手机号";
-          this.isShow = true;
+          this.isShow1 = true;
         }
       }
     },
@@ -145,8 +141,22 @@ export default {
         // }
       }
     },
-    toggle() {
-      this.check = !this.check;
+
+    tog() {
+      this.isChecked = !this.isChecked;
+      this.isAbled = !this.isAbled;
+    },
+    randomNum(min, max) {
+      return Math.floor(Math.random() * (max - min) + min);
+    },
+    num() {
+      this.randNum = "";
+      for (var i = 0; i < 4; i++) {
+        this.randNum += this.randomNum(0, 9);
+      }
+    },
+    rand() {
+      this.pcode = this.randNum;
     }
   }
 };
@@ -204,32 +214,18 @@ export default {
     position absolute
     right 10px
     background-color #498e3d
-    // width 100px
-    // height 34px
     color #ffffff
     font-size 16px
-    // line-height 34px
     margin-top 6px
     padding 5px 10px
 
-  .checkbox
-    display inline-block
-    width 16px
-    height 16px
-    line-height 0
-    border 1px solid #498e3d
-    border-radius 50%
-    padding 2px
-    margin-right 10px
-    vertical-align middle
+  .agree
+    span
+      vertical-align middle
 
-  .check
-    display inline-block
-    width 10px
-    height 10px
-    border-radius 50%
-    border 0
-    background-color #498e3d
+  .btn
+    display flex
+    justify-content space-between
 
   button
     outline none
@@ -241,12 +237,11 @@ export default {
     font-size 20px
     line-height 45px
     margin-top 10px
+    background-color #aca7a7
 
   .btn1
-    float left
     background-color #f08200
 
   .btn2
-    float right
     background-color #498e3d
 </style>
