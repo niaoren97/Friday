@@ -1,23 +1,39 @@
 <template lang="pug">
 .container.content
-  img(src="/static/logo/logo.png" class='logo')
-  .center
-    input(type='text' placeholder="请输入关键字进行搜索")
-    span(class='search') 
-      img(src='/static/logo/fangdajing.png')
-    div(class='hot')
-      span 热门: 奇异果  芒果  榴莲
-  .right
-    span(class='user') 
-      img(src='/static/logo/user.png')
-      span 个人中心
-    span(class='cart')
-      img(src='static/logo/cart.png')
-      span 购物车
+  router-link(to="/")
+    img(src="/static/logo/logo.png" class='logo')
+  span(v-if="isEntry") | {{subtitle}}
+  div(v-else)
+    search-box
+    tool-box(v-if="loggedIn")
 </template>
 <script>
+import SearchBox from '@/components/header/SearchBox'
+import ToolBox from '@/components/header/ToolBox'
+import {mapState} from 'vuex'
 export default {
-  name: "HeaderSection"
+  name: "HeaderSection",
+  components: {
+    SearchBox,
+    ToolBox,
+  },
+  computed: {
+    ...mapState({loggedIn: s=>s.user.loggedIn}),
+    page() {
+      return this.$route.path.split('/')[1]
+    },
+    subtitle() {
+      const m = {
+        login: '登录',
+        signup: '注册',
+        'retrieve-password': '找回密码',
+      }
+      return m[this.page]
+    },
+    isEntry() {
+      return ['login', 'signup', 'retrieve-password'].indexOf(this.page) > -1
+    }
+  }
 };
 </script>
 <style lang="stylus" scoped>
