@@ -11,19 +11,25 @@
         
         //- span(v-for="(item,index) in out" v-if="islogin" class="tab")
         //-   span {{item}}
+        router-link(to="/login")  登录
+        router-link(to="/signup") 注册
         img(src="/static/logo/telphone.png")
         span 400-800-8820
 </template>
 <script>
+import {mapState} from 'vuex'
+
 export default {
   name: "HeaderBar",
   data() {
     return {
-      islogin:true,
       city:'郑州',
       out:'登录',
       enter:['131223131231', '退出' ,'我的订单','我的消息','我是商家']
     }
+  },
+  computed: {
+    ...mapState({islogin: s => s.user.loggedIn})
   },
   methods:{
     toggle() {

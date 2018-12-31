@@ -4105,19 +4105,17 @@ dom-serializer@0:
     domelementtype "~1.1.1"
     entities "~1.1.1"
 
-<<<<<<< HEAD
+dom-walk@^0.1.0:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.1.tgz#672226dc74c8f799ad35307df936aba11acd6018"
+  integrity sha1-ZyIm3HTI95mtNTB9+TaroRrNYBg=
+
 dom7@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/dom7/-/dom7-2.1.2.tgz#a914070c0abe8465384997a9c4f34475f67f75bd"
   integrity sha512-cGwWtpu7KY3JnbREGqG4EGC/u+1hyLfWVMqrqRjmwiO8d5i4B+0imLZAQ/cJbiXnjbs0pdIUzcUyeI9BbnyKNg==
   dependencies:
     ssr-window "^1.0.1"
-=======
-dom-walk@^0.1.0:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.1.tgz#672226dc74c8f799ad35307df936aba11acd6018"
-  integrity sha1-ZyIm3HTI95mtNTB9+TaroRrNYBg=
->>>>>>> f956c79bc2cf10ceea27df3db1fdfc3f9acc5d26
 
 domain-browser@^1.1.1:
   version "1.2.0"
@@ -7862,6 +7860,11 @@ moment@2.22.2:
   version "2.22.2"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
   integrity sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=
+
+moment@^2.23.0:
+  version "2.23.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.23.0.tgz#759ea491ac97d54bac5ad776996e2a58cc1bc225"
+  integrity sha512-3IE39bHVqFbWWaPOMHZF98Q9c3LDKGTmypMiTM2QygGXXElkFWIH7GxfmlwmY2vwa+wmNsoYZmG2iusf1ZjJoA==
 
 move-concurrently@^1.0.1:
   version "1.0.1"
