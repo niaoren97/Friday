@@ -62,7 +62,9 @@ export default {
       border 1px solid #4b943d
     .search
       display inline-block
+      box-sizing border-box
       width 40px
+      padding 0 10px
       height 40px
       line-height 40px
       background-color #4b943d

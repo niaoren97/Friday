@@ -10,7 +10,9 @@
 export default {
   name:'Verification',
   data() {
-    return {};
+    return {
+      code:''
+    };
   },
    // 生成一个随机数
   methods: {
@@ -27,6 +29,7 @@ export default {
     e() {
       this.clear();
       this.drawPic();
+      this.$emit('getCode',this.code)
     },
     clear() {
       var canvas = this.$refs.canvas;
@@ -37,6 +40,7 @@ export default {
     },
     // 绘制验证码图片
     drawPic() {
+      this.code =''
       var canvas = this.$refs.canvas;
       var width = canvas.width;
       var height = canvas.height;
@@ -65,6 +69,8 @@ export default {
         //恢复坐标原点和旋转角度
         ctx.rotate((-deg * Math.PI) / 180);
         ctx.translate(-x, -y);
+        this.code+=txt;
+
       }
       // 绘制干扰线
       for (var i = 0; i < 8; i++) {
