@@ -13,5 +13,4 @@ export default {
 .sidebar
   border solid 1px #eee
   width 170px
-
 </style>

@@ -13,4 +13,7 @@ export default {
 .item
   height 36px
   line-height 36px
+  .router-link-active
+    color green
+    text-decoration underline
 </style>

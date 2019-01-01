@@ -51,6 +51,9 @@ export default {
       return (fs.indexOf(f) > -1) ? f : 'all'
     }
   },
+  created() {
+      this.filter = this.pathFilter
+  },
   watch: {
     pathFilter() {
       this.filter = this.pathFilter

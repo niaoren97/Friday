@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import AboutView from '@/views/AboutView'
+import CartView from '@/views/CartView'
 import CategoryView from '@/views/CategoryView'
 import CityView from '@/views/CityView'
 import EntryView from '@/views/EntryView'
@@ -53,7 +54,11 @@ const router = new Router({
     // 商家
     { path: '/seller/:sid', component: SellerView },
     // 购物车
-    { path: '/cart', component: SellerView },
+    {
+      path: '/cart',
+      component: CartView,
+      requiresAuth: process.env.VUE_APP_STAGE === 'play' ? false : true,
+    },
     { path: '/cart/order/:oid', component: OrderView },
     // 导航
     { path: '/nav', component: NavView },
