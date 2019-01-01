@@ -1,5 +1,6 @@
 <template lang="pug">
-panel(title="修改密码")
+panel(title="意见反馈")
+  .feedback
 </template>
 <script>
 export default {
@@ -7,4 +8,6 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+.feedback
+  padding 40px
 </style>

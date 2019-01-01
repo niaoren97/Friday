@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import moment from 'moment'
+
 function install() {
   Vue.filter('safe-phone', function(value) {
     if (!/\d{11}/.test(value)) {
@@ -10,6 +12,15 @@ function install() {
   Vue.filter('currency', function(v, c) {
     const map = { cn: '¥' }
     return `${map[c]}${v}`
+  })
+
+  Vue.filter('dateFormat', function(v, format) {
+    const m = moment(v)
+    return m.format(format)
+  })
+  Vue.filter('number', function(v, flag) {
+    if (flag) return v > 0 ? `+${v}` : `-${v}`
+    return v
   })
 }
 export default install

@@ -7,7 +7,12 @@
 html, body
   margin 0
   padding 0
-
+a
+  &, &:link, &:visited, &:hover, &:active
+    text-decoration: none
+    color #000
+button
+  border none
 .clearfix::after, .clearfix::before
   content ' ' /* Older browser do not support empty content */
   visibility hidden

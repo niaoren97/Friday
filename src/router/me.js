@@ -12,26 +12,43 @@ import MyFootprint from '@/components/me/MyFootprint'
 import ModifyPassword from '@/components/me/ModifyPassword'
 
 import MyMessage from '@/components/me/MyMessage'
+import MyMessageDetail from '@/components/me/MyMessageDetail'
 import MyFeedback from '@/components/me/MyFeedback'
 
 export default {
   path: '/me',
   component: UserCenter,
-  meta: { requiresAuth: true },
+  meta: { requiresAuth: process.env.VUE_APP_STAGE === 'play' ? false : true },
   children: [
     { path: 'account', component: MyAccount, alias: '' },
     { path: 'orders', component: MyOrder },
+    { path: 'orders/:filter', component: MyOrder },
     { path: 'points', component: MyPoint },
-    { path: 'point-order', component: MyPointOrder },
+    { path: 'point-orders', component: MyPointOrder },
     { path: 'wallet', component: MyWallet },
 
     { path: 'profile', component: MyProfile },
-    { path: 'address', component: MyAddress },
-    { path: 'favorite', component: MyFavorite },
-    { path: 'footprint', component: MyFootprint },
+    { path: 'addresses', component: MyAddress },
+    { path: 'favorites', component: MyFavorite },
+    { path: 'footprints', component: MyFootprint },
     { path: 'modify-password', component: ModifyPassword },
 
-    { path: 'message', component: MyMessage },
+    {
+      path: 'messages',
+      component: MyMessage,
+      // children: [
+      //   {
+      //     path: ':mid',
+      //     name: 'message-detail',
+      //     component: MyMessageDetail,
+      //   },
+      // ],
+    },
+    {
+      path: 'messages/:mid',
+      component: MyMessageDetail,
+      name: 'message-detail',
+    },
     { path: 'feedback', component: MyFeedback },
   ],
 }

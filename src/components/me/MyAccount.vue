@@ -2,17 +2,18 @@
 .container
   .top.clearfix
     .fl
-      img.avatar(:src="me.avatar")
-      span 您好,
+      img.avatar(v-if="!me.avatar",src="/static/misc/avatar.png")
+      img.avatar(v-else,:src="me.avatar")
+      span.hello 您好,
         span(v-if="me.name") {{me.name}}
         span(v-else) {{me.mobile | safe-phone}}
-    .fr
+    .fr.right
       .block
         div 当前积分
-        div {{me.points}} 
+        div.point {{me.points || 0}} 
       .block
         div 我的钱包
-        div {{me.money | currency('cn')}} 
+        div.point {{(me.money||0) | currency('cn')}} 
       .block
         //- router-link(to="/me/") TODO:
         div 充值有礼
@@ -34,14 +35,28 @@ export default {
 .top
   height 220px
   background-color #F4FFF2
-  border solid 1px #f6f6f6
+  border solid 1px #eee
   margin-bottom 1em
-.second
+  padding 40px
+// .second
 
 .avatar
-  width 150px
-  height 150px
+  width 140px
+  height 140px
+  margin-right 40px
+  vertical-align middle
+.hello
+  vertical-align middle
+  span
+    color red
 .block
+  display inline-block
+  vertical-align middle
+  margin-left 80px
   span:last-child
     color red
+  .point
+    color red
+.right
+  padding 35px 0
 </style>
