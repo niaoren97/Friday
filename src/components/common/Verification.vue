@@ -1,4 +1,3 @@
-
 <template>
   <div class="verification">
     <canvas id="canvas" ref='canvas' width="110" height="50"></canvas>
@@ -9,6 +8,7 @@
 <script type="text/javascript">
 export default {
   name:'Verification',
+  props: ['value'],
   data() {
     return {
       code:''
@@ -90,6 +90,7 @@ export default {
     }
   },
   mounted: function() {
+    this.$emit('getCode')
     this.drawPic();
   }
 };

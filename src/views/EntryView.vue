@@ -1,7 +1,7 @@
 <template lang="pug">
-.container 
-  .main.clearfix
-    .content.card.fr
+.container.main.clearfix
+  .content.card
+    .card-wrapper.fr
       component(:is="componentID")
 
 </template>
@@ -47,6 +47,8 @@ export default {
 .main
   background center/cover url(/static/banner/signup.png)
   height 500px
-  // .card
-  //   float
+  .card
+    height 100% 
+    overflow hidden
+    margin auto
 </style>
