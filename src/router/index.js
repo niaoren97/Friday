@@ -12,6 +12,7 @@ import MallProductView from '@/views/MallProductView'
 import NavView from '@/views/NavView'
 import OrderView from '@/views/OrderView'
 import SellerView from '@/views/SellerView'
+import ProductView from '@/views/ProductView'
 
 import NotFoundView from '@/views/404.vue'
 
