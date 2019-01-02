@@ -36,12 +36,22 @@
     radio(:checked="agree", @click="agree = !agree")
     span 我已阅读并同意《星期五用户协议》
   .form-group.buttons
-    f-button(big, secondary, @click="", :disabled="!signupable", :extraStyle="{width: '133px'}") 注册
+    f-button(big, secondary, @click="signup", :disabled="!signupable || signuping", :extraStyle="{width: '133px'}") 注册
+      template(slot="decoration", v-if="signuping")
+        img.cog(src="/static/misc/cog.png")
     router-link(to="/login")
       f-button(big, primary,:extraStyle="{width: '133px'}" ) 登录
 </template>
 <script>
 import Verification from '@/components/common/Verification'
+import { mapState } from 'vuex'
+import axios from 'axios'
+function msgFormater( msg) {
+  let lis = Object.keys(msg).map(k => {
+    return `<ul>${msg[k].map(i => `<li>${i}</li>`).join('')}</ul>` 
+  }).join('')
+  return lis
+}
 export default {
   name: 'SignupCard',
   components: {
@@ -49,6 +59,8 @@ export default {
   },
   data() {
     return {
+      signuping: false,
+
       agree: true,
       down: false,
       mobileCode: '',
@@ -82,31 +94,10 @@ export default {
         r2.test(this.password) &&
         r2.test(this.passwordAgain) &&
         this.password === this.passwordAgain &&
-        this.verifyCode.toLowerCase() === this.verifiedCode.toLowerCase()
-        && this.agree
+        this.verifyCode.toLowerCase() === this.verifiedCode.toLowerCase() &&
+        this.agree
       )
     },
-    // mobileCorrect() {
-    //   return this.mobileRe.test(this.mobile)
-    // },
-    // mobileHint() {
-    //   return !this.mobileCorrect ? '号码格式不正确' : ''
-    // },
-    // passwordCorrect() {
-    //   return this.pwRe.test(this.password)
-    // },
-    // passwordHint() {
-    //   return !this.passwordCorrect ? '密码格式不正确' : ''
-    // },
-    // passwordAgainCorrect() {
-    //   return this.password === this.passwordAgain
-    // },
-    // passwordAgainHint() {
-    //   return !this.passwordAgainCorrect && this.passwordAgain.length > 0 ? '密码不一致' : ''
-    // },
-    // verifyCorrect() {
-    //   return (this.code || '').toLowerCase() === this.verifyCode.toLowerCase()
-    // },
   },
   methods: {
     getMobileCode() {
@@ -157,6 +148,32 @@ export default {
       } else {
         this.verifyCorrect = true
       }
+    },
+    signup() {
+      // this.$toast.present({message: 'hello tosts'})
+      this.signuping = true
+      axios
+        .post('/api/user/signup', {
+          mobile: this.mobile,
+          password: this.password,
+        })
+        .then((res) => {
+          this.signuping = false
+          if (res.data.token) {
+            // success!
+            this.$toast.present({
+              message: '注册成功! 3秒后前往登录页面',
+              action: { title: '立即前往', fn: () => {this.$router.push('/login')} },
+            })
+          } else {
+            this.$toast.present({
+              message: '注册失败' + msgFormater(res.data)
+            })
+          }
+        })
+        .catch((err) => {
+          this.signuping = false
+        })
     },
   },
 }
@@ -238,6 +255,9 @@ export default {
 
   *
     vertical-align middle
+
+.cog
+  animation rotate 1s infinite linear
 
 .buttons
   display flex

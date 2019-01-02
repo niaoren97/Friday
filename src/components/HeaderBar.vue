@@ -4,7 +4,7 @@
     .top
       .location 所在城市:{{city}}
       .tabbar  
-        span(v-for="(item,index) in enter" v-if="islogin" class="tab")
+        span(v-for="(item,index) in enter" v-if="loggedIn" class="tab")
           span(v-if="index === 0") 你好,
           span {{item}}
           span(v-if="index === 1" @click="toggle()")
@@ -30,7 +30,7 @@ export default {
     }
   },
   computed: {
-    ...mapState({islogin: s => s.user.loggedIn})
+    ...mapState({loggedIn: s => s.user.loggedIn})
   },
   methods:{
     toggle() {
