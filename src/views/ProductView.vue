@@ -12,7 +12,7 @@
         .btn2(@click='next()')
           img(src='static/products/jiantou2.png')
     .des
-      .title 新疆哈密瓜1500g
+      .title {{product.name}}
       .label 
         span 全国
         span 礼拜五
@@ -20,17 +20,15 @@
         span 自营
       .description
         .des-left
-          img(src='/static/products/goods2.png')
-          p(class='zishen') 资深买家
-        .des-right 雀斑石榴持续热卖！云南蒙自石榴，原产波斯（今伊朗）一带，公元前二世纪时传 入我国。是中国三大石榴之一，粒大皮薄，汁多味甜爽口。雀斑石榴持续热卖！云南蒙自石榴，原产波斯（今伊朗）一带，公元前二世纪时传 入我国。是中国三大石榴之一，粒大皮薄，汁多味甜爽口。
+          img(:src='product.seller && product.seller.logo')
+          p(class='zishen') {{product.name}}
+        .des-right {{product.seller && product.seller.description}}
 
       .price
-        span 现价￥:20.00
-        span 原价￥:40.00
+        span 现价￥: {{product.specs && product.specs[selected].current_price}}
+        span 原价￥: {{product.specs && product.specs[selected].original_price}}
       .guige 请选择规格
-        span(:class='{active_border:selected==0}', @click='select(0)') 100g
-        span(:class='{active_border:selected==1}', @click='select(1)') 200g
-        span(:class='{active_border:selected==2}', @click='select(2)') 500g
+        span(v-for='(item,index) in product.specs', :class='{active_border:selected==index}', @click='select(index)') {{item.quantity}}
       .number 数量:
         span(class='jian', @click='jian()') -
         span(class='num') {{num}}
@@ -56,8 +54,8 @@
     span(:class='{cur_bar:cur==0}', @click='togbar(0), change()') 商品详情
     span(:class='{cur_bar:cur==1}', @click='togbar(1), change()') 商品评价
   .details(v-if='details==true')
-    .details_title 新疆哈密瓜 
-    .details_description 明水礼盒十分优秀，是送朋友，送亲人的不二选择。什么，您还不知道明水礼盒，今年过年不收礼，收礼只收明水礼盒，OUT了吧，赶紧买起礼盒送亲朋，送好友吧。完成交易，如有剩余库存，从新上架产品
+    .details_title {{product.name}} 
+    .details_description {{product.detail}}
     img(src='/static/products/detail.png')
   .comments(v-else)
     .comments_left
@@ -78,11 +76,10 @@
         img(src='/static/products/plt.png')
         img(src='/static/products/plt.png')
         img(src='/static/products/plt.png')
-    
-        
       
 </template>
 <script>
+import axios from 'axios'
 import Magnifier from "@/components/common/Magnifier.vue";
 export default {
   components: { Magnifier },
@@ -103,6 +100,12 @@ export default {
         ]
       }
     };
+  },
+  created() {
+    axios.get('/api/products/1')
+    .then(res =>{
+      this.product = res.data
+    })
   },
   methods: {
     pre() {
@@ -153,7 +156,6 @@ export default {
   .picture
     float left
     width 500px
-    background-color pink
 
     .big
       margin-bottom 40px
@@ -188,7 +190,6 @@ export default {
     float right
     width 740px
     height 600px
-    background-color #c6e830
     .title 
       font-size 26px
       margin 20px 0
@@ -221,8 +222,8 @@ export default {
         text-align center
         margin-right 30px
         img 
-        width 100px
-        height 100px
+          width 100px
+          height 100px
         .zishen
           background-color #ffe313
           border-radius 20px
@@ -348,6 +349,8 @@ export default {
     margin 10px 0
 
 .comments
+  padding 20px 0
+  border-bottom 1px solid #f2f2f2
   overflow hidden
   .comments_left
     float left
