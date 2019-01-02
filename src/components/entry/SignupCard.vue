@@ -33,7 +33,7 @@
     input(type='text', placeholder="手机验证码", v-model="mobileCode")
     button(@click="getMobileCode", ref="mobile", :disabled="down") 获取验证码
   .form-group.agree
-    radio(:checked="agree", @click="agree = !agree")
+    radio(v-model="agree")
     span 我已阅读并同意《星期五用户协议》
   .form-group.buttons
     f-button(big, secondary, @click="signup", :disabled="!signupable || signuping", :extraStyle="{width: '133px'}") 注册
