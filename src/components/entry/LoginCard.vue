@@ -1,67 +1,89 @@
 <template lang="pug">
-.login-card
-  .form-group
-    input(type="text", placeholder="请输入手机号")
-  .hint
-  .form-group
-    input(type="password", placeholder="请输入密码(6-20位号码字符)")
-  .hint
-  .form-group
-    input(type="password", placeholder="请再次输入密码确认")
-  .hint
-  .form-group
-    input(type="")
-  .form-group
-    input(type='text', placeholder="手机验证码", v-model="mobileCode")
-    button(@click="getMobileCode", ref="mobile", :disabled="down") 获取验证码
-  .form-group
-    check-box(:checked="agree", @click="agree = !agree")
-  .form-group
-    f-button(big, primary, @click="")
+div
+  login-mobile-card(v-if='method===0', @changeMethod="method=1") 
+  login-normal-card(v-else, @changeMethod="method=0")
 </template>
 <script>
+import LoginNormalCard from './LoginNormalCard'
+import LoginMobileCard from './LoginMobileCard'
 export default {
   name: 'LoginCard',
+  components: {
+    LoginNormalCard,
+    LoginMobileCard,
+  },
   data() {
-    return {agree: true,
-    down: false
+    return {
+      method: 1,
     }
   },
   methods: {
-    getMobileCode() {
-      let t = 59
-      this.down = true
-      const timer = setInterval(()=> {
-        if(t=== -1)
-        {
-          this.down = false
-          clearInterval(timer)
-          return
-        }
-        this.$refs.mobile = `已发送(${t}s)`
-        t--
-      }, 1000)
-    }
+    // a() {
+    //   this.method = 0;
+    //   console.log('to 0')
+    // }
   }
+  // render() {
+
+  // }
 }
 </script>
 <style lang="stylus" scoped>
 .login-card
   height 100%
   width 386px
+  height 500px
   padding-top 30px
   box-shadow 0 0 3px rgba(30, 30, 30, 0.3)
   background-color #fff
+.green
+  color green
 .form-group
   width 306px
   margin auto
   height 44px
+
   input
     height 100%
     width 100%
     border solid 1px lightgray
     font-size 18px
     padding 7px
+
+.line
+  height 55px
+  line-height 55px
+  .router-link
+    color #F08201
+  *
+    vertical-align middle
+
 .hint
   height 30px
+  width 306px
+  margin auto
+  font-size 10px
+  line-height 30px
+  color red
+  opacity 0
+
+  &.show
+    opacity 1
+
+  img
+    margin-right 5px
+
+  *
+    vertical-align middle
+  
+.auto-login
+  margin-left 5px
+.forget
+  text-decoration underline
+  a
+    color #F08201
+
+.buttons
+  display flex
+  justify-content space-between
 </style>

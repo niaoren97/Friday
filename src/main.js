@@ -3,9 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import registrator from './plugins/registrator'
+import http from './plugins/http'
 import filters from './filters'
 import './registerServiceWorker'
-
 import './assets/style/style.styl'
 
 // 引入swiper
@@ -17,6 +17,7 @@ Vue.use(VueAwesomeSwiper /* { default global options } */)
 
 Vue.config.productionTip = false
 Vue.use(registrator)
+Vue.use(http)
 
 filters()
 

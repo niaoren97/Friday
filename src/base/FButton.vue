@@ -1,11 +1,15 @@
 <template lang="pug">
-button(:class="classes",@click="$emit('click')", :disabled="disabled")
+button(:class="classes",@click="$emit('click')", :disabled="disabled", :style="extraStyle")
   slot
+  slot(name="decoration")
 </template>
 <script>
 export default {
   name: 'FButton',
   props: {
+    extraStyle: {
+      type: Object, 
+    },
     disabled: {
       type: Boolean,
       default: false,
@@ -47,6 +51,8 @@ button
   border none
   border-radius 5px
   font-size 16px
+  *
+    vertical-align middle
   &:disabled
     cursor not-allowed
   &.big

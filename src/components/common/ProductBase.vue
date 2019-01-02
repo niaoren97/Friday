@@ -2,7 +2,7 @@
 .product(:class="myclass")
   img(:src="product.images[0]")
   .txt
-    .title {{product.title}}
+    .title {{product.name}}
     .description
         slot(name="description")
     .foot

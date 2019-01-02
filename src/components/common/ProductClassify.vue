@@ -1,9 +1,9 @@
 <template lang='pug'>
 product-base(:product='product',:myclass="myclass")
-  p(slot="description" class="description") {{product.description}}
+  p(slot="description" class="description") {{product.digest}}
   p(slot="foot" class='price') 
-    span $ {{product.original_price}}
-    span $ {{product.current_price}}
+    span $ {{product.specs[0].original_price}}
+    span $ {{product.specs[0].current_price}}
     img(src='/static/logo/cart2.png')
 //- <h1 slot="foot"></h1>
 </template>

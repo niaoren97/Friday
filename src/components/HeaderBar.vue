@@ -11,8 +11,9 @@
         
         //- span(v-for="(item,index) in out" v-if="islogin" class="tab")
         //-   span {{item}}
-        router-link(to="/login")  登录
-        router-link(to="/signup") 注册
+        span.auth(v-if="!loggedIn")
+          router-link(to="/login")  登录
+          router-link(to="/signup") 注册
         img(src="/static/logo/telphone.png")
         span 400-800-8820
 </template>
@@ -58,4 +59,7 @@ export default {
   height 17px
 .tab>span 
   margin 0 5px 
+.auth
+  a
+    margin-right 20px
 </style>

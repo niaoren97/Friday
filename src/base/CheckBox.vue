@@ -1,29 +1,29 @@
 <template lang="pug">
-  .box(@click="$emit('click')")
-    span(class='checked' v-if='checked')
+.check-box(@click="$emit('input', !value)", :class="{checked: value}")
+  .inner(v-show="value")
 </template>
 <script>
 export default {
   name: 'CheckBox',
-  props: ['checked']
+  props: ['value'],
+  // data() {
+  //   return {inValue: this.value}
+  // }
+
 }
 </script>
 <style lang="stylus" scoped>
-@import '../assets/style/vars.styl'
-.box
+.check-box
   display inline-block
-  width 16px
-  height 16px
+  width 14px
+  height 14px
+  border solid 1px #D3D3D3
   line-height 0
   padding 2px
-  margin-right 10px
-  border solid 1px $primary
-  border-radius 50%
-  vertical-align middle
-.checked
-  display inline-block
-  width 10px
-  height 10px
-  background-color green
-  border-radius 50%
+  &.checked
+    border-color green
+  .inner
+    width 8px
+    height 8px
+    background-color green
 </style>

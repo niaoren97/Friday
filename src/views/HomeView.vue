@@ -32,7 +32,7 @@
       .right
         span 更多&gt;&gt;
     .display
-      product-classify(v-for="item in products" :product="item" myclass="product-classify")
+      product-classify(v-for="item in fruit" :product="item" myclass="product-classify")
 
     .seafood 
       .left 
@@ -42,7 +42,7 @@
       .right
         span 更多&gt;&gt;
     .display
-      product-classify(v-for="item in products" :product="item" myclass="product-classify")
+      product-classify(v-for="item in seafood" :product="item" myclass="product-classify")
 
     .meat 
       .left 
@@ -52,7 +52,7 @@
       .right
         span 更多&gt;&gt;
     .display
-      product-classify(v-for="item in products" :product="item" myclass="product-classify")
+      product-classify(v-for="item in meat" :product="item" myclass="product-classify")
     .egg 
       .left 
         img(src="/static/logo/egg.png")
@@ -61,77 +61,102 @@
       .right
         span 更多&gt;&gt;
     .display
-      product-classify(v-for="item in products" :product="item" myclass="product-classify")
+      product-classify(v-for="item in milk" :product="item" myclass="product-classify")
     
 </template>
 <script>
-import HotSale from "@/components/common/HotSale.vue";
-import CountDown from "@/components/home/CountDown.vue";
-import Product from "@/components/common/Product.vue";
-import ProductClassify from "@/components/common/ProductClassify.vue";
+import HotSale from '@/components/common/HotSale.vue'
+import CountDown from '@/components/home/CountDown.vue'
+import Product from '@/components/common/Product.vue'
+import ProductClassify from '@/components/common/ProductClassify.vue'
 export default {
-  name: "Homeview",
+  name: 'Homeview',
   data() {
     return {
       swiperOption: {
-        autoplay: 1000,
-        pagination: ".swiper-pagination",
+        autoplay: {
+          delay: 4500,
+          disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+          },
         paginationClickable: true,
         mousewheelControl: true,
-        observeParents: true
+        observeParents: true,
       },
+      friday: [],
+      fruit: [],
+      seafood: [],
+      milk: [],
+      meat: [],
       product: {
         images: [
-          { id: 1, src: "/static/goods/bigposter.png" },
-          { id: 2, src: "/static/goods/bigposter.png" },
-          { id: 3, src: "/static/goods/bigposter.png" }
-        ]
+          { id: 1, src: '/static/goods/bigposter.png' },
+          { id: 2, src: '/static/goods/bigposter.png' },
+          { id: 3, src: '/static/goods/bigposter.png' },
+        ],
       },
       products: [
         {
-          images: ["/static/goods/i1.png"],
-          title: "新西兰黄金奇异果",
+          images: ['/static/goods/i1.png'],
+          title: '新西兰黄金奇异果',
           number: 6,
           currentPrice: 28.8,
-          description:"果肉绵密、花蜜般的甘甜百吃不厌",
-          original_price:66.66,
-          current_price:44.22
+          description: '果肉绵密、花蜜般的甘甜百吃不厌',
+          original_price: 66.66,
+          current_price: 44.22,
         },
         {
-          images: ["/static/goods/i4.png"],
-          title: "新西兰黄金奇异果",
+          images: ['/static/goods/i4.png'],
+          title: '新西兰黄金奇异果',
           number: 6,
           currentPrice: 28.8,
-          description:"果肉绵密、花蜜般的甘甜百吃不厌",
-          original_price:66.66,
-          current_price:44.22
+          description: '果肉绵密、花蜜般的甘甜百吃不厌',
+          original_price: 66.66,
+          current_price: 44.22,
         },
         {
-          images: ["/static/goods/i1.png"],
-          title: "新西兰黄金奇异果",
+          images: ['/static/goods/i1.png'],
+          title: '新西兰黄金奇异果',
           number: 6,
           currentPrice: 28.8,
-          description:"果肉绵密、花蜜般的甘甜百吃不厌",
-          original_price:66.66,
-          current_price:44.22
+          description: '果肉绵密、花蜜般的甘甜百吃不厌',
+          original_price: 66.66,
+          current_price: 44.22,
         },
         {
-          images: ["/static/goods/i4.png"],
-          title: "新西兰黄金奇异果",
-          number: 6,    
+          images: ['/static/goods/i4.png'],
+          title: '新西兰黄金奇异果',
+          number: 6,
           currentPrice: 28.8,
-          description:"果肉绵密、花蜜般的甘甜百吃不厌",
-          original_price:66.66,
-          current_price:44.22
-        }
-      ]
-    };
+          description: '果肉绵密、花蜜般的甘甜百吃不厌',
+          original_price: 66.66,
+          current_price: 44.22,
+        },
+      ],
+    }
   },
   components: {
     HotSale,
     Product,
     CountDown,
-    ProductClassify
+    ProductClassify,
+  },
+  methods: {
+
+  },
+  created() {
+    this.$http.get('/api/home')
+    .then(({data})=> {
+
+      this.friday = data.friday
+      this.meat = data.meat
+      this.milk = data.milk
+      this.fruit = data.fruit
+      this.seafood = data.seafood
+    })
   },
   mounted() {
     // var mySwiper = new Swiper(".swiper-container", {
@@ -147,10 +172,10 @@ export default {
   },
   computed: {
     swiper() {
-      return this.$refs.mySwiper.swiper;
-    }
-  }
-};
+      return this.$refs.mySwiper.swiper
+    },
+  },
+}
 </script>
 <style lang="stylus" scoped>
 .content
@@ -188,7 +213,7 @@ export default {
   margin-right 0
 
 // 分类商品展示css
-.fruit,.seafood,.meat,.egg
+.fruit, .seafood, .meat, .egg
   overflow hidden
   padding 0 20px
   background-color #ebffe8
@@ -198,14 +223,17 @@ export default {
   .left
     float left
     line-height 100px
-    img 
+
+    img
       width 40px
       height 40px
       vertical-align middle
+
     span:nth-child(2)
       font-size 30px
       color #549648
       margin 0 15px
+
     span:nth-child(3)
       font-size 20px
       color #999999
@@ -215,11 +243,14 @@ export default {
     font-size 15px
     line-height 100px
     color #999999
+
 .display
   overflow hidden
+
 .product-classify
   float left
   margin-right 20px
+
   &:last-child
     margin-right 0
 </style>

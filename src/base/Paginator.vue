@@ -1,10 +1,17 @@
 <template lang="pug">
 .links
   router-link(:to="prev()") &lt;
-
+  router-link(:to="url(1)") 1
+  span(v-if="current-first > max/2") ...
+  //- from 
+  router-link(v-for="l in links", :key="l",
+    :to="url(l)") {{l}}
+  span(v-if="last-current > max/2") ...
+  router-link(:to="url(last)") {{last}}
   router-link(:to="next()") &gt;
 </template>
 <script>
+import {range} from 'lodash'
 export default {
   name: 'Paginator',
   props: {
@@ -21,7 +28,10 @@ export default {
   },
   // ['current', 'last', 'first', 'is', 'base', 'max'],
   computed: {
-
+    links() {
+      const w = (this.max-2)/2
+      return range(Math.ceil(this.current-w), Math.floor(this.current+w))
+    }
   },
   methods: {
     url(x) {
