@@ -22,8 +22,10 @@ class Toast {
       }
       .__toast__container .__toast button {
         padding: 10px;
+        display: block;
+        margin: auto;
         border-radius: 2px;
-        border: solid 2px lightgray;
+        border: solid 2px gray;
       }
     `
     document.head.appendChild(s)
@@ -40,18 +42,18 @@ class Toast {
     }
     return container
   }
-  static config = { duration: 2000 }
+  static config = { duration: 3000 }
   static config({ duration }) {
     Toast.config.duration = duration
   }
   static present({ message, action  }) {
     const toast = document.createElement('div')
     toast.classList.add('__toast')
-    toast.innerText = message
+    toast.innerHTML = message
     if (action) {
       const {fn, title} = action
       const button = document.createElement('button')
-      button.innerHTML = title
+      button.innerText = title
       button.onclick = fn()
       toast.appendChild(button)
     }
