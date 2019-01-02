@@ -1,12 +1,16 @@
 <template lang="pug">
-.sidebar
-  | this is a sidebar
+.sidebar(:class="extraClass")
+  slot
 </template>
 <script>
+// import SideBarItem from 'module'
 export default {
   name: 'SideBar',
-  props: ['s'],
+  props: ['extraClass'],
 }
 </script>
 <style lang="stylus" scoped>
+.sidebar
+  border solid 1px #eee
+  width 170px
 </style>

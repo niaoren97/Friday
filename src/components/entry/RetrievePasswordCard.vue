@@ -21,7 +21,8 @@
       span(v-text='rpasswordarm')
       //- 验证码------------------------------
     input(class='yanzhengma' type='text' placeholder='验证码', v-model='mycode',@input='arm4()' @blur='arm4()') 
-    verification(@getCode="getCode($event)")
+    //- verification(@getCode="getCode($event)")
+    verification(v-model="code")
     p(class='arm')
       img(v-if='isShow4' src='/static/logo/alert.png')
       span(v-text='codearm')
@@ -125,9 +126,6 @@ export default {
           this.codearm = "验证码不一致";
         }
       }
-    },
-    getCode(code) {
-      this.code = code;
     },
     arm5() {
       if (this.pcode === "") {

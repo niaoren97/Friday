@@ -1,4 +1,3 @@
-
 <template>
   <div class="verification">
     <canvas id="canvas" ref='canvas' width="110" height="50"></canvas>
@@ -9,12 +8,13 @@
 <script type="text/javascript">
 export default {
   name:'Verification',
+  props: ['value'],
   data() {
     return {
       code:''
     };
   },
-   // 生成一个随机数
+  // 生成一个随机数
   methods: {
     randomNum(min, max) {
       return Math.floor(Math.random() * (max - min) + min);
@@ -29,7 +29,7 @@ export default {
     e() {
       this.clear();
       this.drawPic();
-      this.$emit('getCode',this.code)
+      this.$emit('input',this.code)
     },
     clear() {
       var canvas = this.$refs.canvas;
@@ -90,7 +90,7 @@ export default {
     }
   },
   mounted: function() {
-    this.drawPic();
+    this.e()
   }
 };
 </script>
