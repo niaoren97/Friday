@@ -12,6 +12,7 @@ import NavView from '@/views/NavView'
 import OrderView from '@/views/OrderView'
 import SellerView from '@/views/SellerView'
 import UserCenter from '@/views/UserCenter'
+import ProductView from '@/views/ProductView'
 
 import NotFoundView from '@/views/404.vue'
 
@@ -39,6 +40,7 @@ export default new Router({
     { path: '/retrieve-password', component: EntryView },
     // 分类商品
     { path: '/category', component: CategoryView },
+    {path: '/product', component: ProductView},
     // 同城
     { path: '/city', component: CityView },
     // 礼拜五

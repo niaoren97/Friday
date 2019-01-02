@@ -74,8 +74,19 @@ export default {
   data() {
     return {
       swiperOption: {
-        autoplay: 1000,
-        pagination: ".swiper-pagination",
+        autoplay: {
+            delay: 2500,
+            loop:true,
+            disableOnInteraction: false
+          },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+          },
+           navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          },
         paginationClickable: true,
         mousewheelControl: true,
         observeParents: true
