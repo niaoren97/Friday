@@ -1,6 +1,6 @@
 <template lang='pug'>
 tr.item
-  td 
+  td.one 
     check-box 
     img(:src="products.images")
     span.digest {{products.digest}}
@@ -26,7 +26,7 @@ export default {
       number: 0,
       sum: 0,
       products: {
-        images: ["/static/goods/i1.png"],
+        images: ["/static/goods/i1.png","/static/goods/i1.png"]],
         digest: "云南蒙自石榴8个装",
         specs: [
           {
@@ -99,5 +99,8 @@ table.f-table
       .del 
         color green 
         font-size 18px
-    
+.one 
+  text-align left 
+  padding-left 30px
+  // width 40%   
 </style>

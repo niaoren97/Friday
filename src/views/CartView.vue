@@ -6,7 +6,7 @@
     .logo
       img(src="/static/logo/cart2.png")
       span 购物车
-    cart-group(:items='[]')
+    cart-group
     
 </template>
 <script>

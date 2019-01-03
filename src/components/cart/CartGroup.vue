@@ -3,7 +3,9 @@
 f-table
   thead
     tr.head
-      th 店铺名称
+      th.one
+        check-box
+        span 店铺名称
       th 规格
       th 单价
       th 数量
@@ -11,6 +13,20 @@ f-table
       th 操作
   tbody
     cart-item
+  tfoot
+    tr.foot 
+      th.one
+        span.all 全选
+        span.batch 批量删除
+      th 
+      th
+      th
+      th 
+      th 
+        span.total 商品总计:
+        span.totalmoney ￥{{total}}
+        span.now 立即购买
+
     
     
 
@@ -19,13 +35,51 @@ f-table
 <script>
 import FTable from "@/base/FTable.vue"
 import CartItem from "@/components/cart/CartItem.vue"
+import CheckBox from "@/base/CheckBox.vue"
 export default {
-   components:{FTable,CartItem}
+   components:{FTable,CartItem,CheckBox},
+   data() {
+     return {
+       total:'999.99'
+     }
+   }
 }
 </script>
 <style lang='stylus' scoped>
-f-table
-  thead
-    
-    
+table.f-table
+  tfoot 
+    .foot 
+      height 120px
+.one 
+  text-align left 
+  padding-left 30px 
+  width 40%   
+  span 
+    margin-left 10px
+.all 
+  font-size 16px
+  font-weight 500
+  color green
+.batch 
+  font-size 16px
+  font-weight 500
+  color green
+.total 
+  font-size 16px
+  font-weight 500
+.totalmoney
+  font-size 20px
+  color #f00
+.now 
+  display inline-block
+  margin-left 20px
+  width 100px
+  height 50px
+  line-height 50px
+  text-align center
+  color #ffffff
+  font-size 18px
+  font-weight 300
+  background-color #f08200
+  border-radius 5px
 </style>
