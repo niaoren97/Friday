@@ -6,17 +6,57 @@
       span 礼拜五
       span Friday
     .right 
-      span(class='juli') 距离开始
-      span(class="time") 5天
-      span(class="time") 15
+      span(class='juli') 距离{{text}}
+      span(class="time") {{days}}天
+      span(class="time") {{hours}}
       span(class='fenge') :
-      span(class="time") 30
+      span(class="time") {{minutes}}
       span(class='fenge') :
-      span(class="time") 00
+      span(class="time") {{seconds}}
       span(class='gengduo') 更多>>
 </template>
 <script>
-export default {};
+import moment from 'moment'
+import {padStart} from 'lodash'
+export default {
+  data() {
+    return {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      text: '开始'
+    }
+  },
+  created() {
+    const timer = setInterval(() => {
+      this.judge()
+    }, 1000)
+  },
+  methods: {
+    judge() {
+
+    const now = new Date
+    let d = now.getDay()
+    if(d === 5) // is friday , to end
+    {
+      this.text = '结束'
+      this.days = padStart(0, 2, '0')
+      this.hours = padStart(23 - now.getHours(), 2, '0')
+      this.minutes = padStart(59- now.getMinutes(), 2, '0')
+      this.seconds = padStart(59 - now.getSeconds(), 2, 0)
+    }else {
+      d = d === 0 ? 7 : d
+      this.text = '开始'
+      this.days = padStart(d < 5 ? 5 - d :  12 - d , 2, 0)
+      this.hours = padStart(23 - now.getHours(), 2, '0')
+      this.minutes = padStart(59- now.getMinutes(), 2, '0')
+      this.seconds = padStart(59 - now.getSeconds(), 2, 0)
+
+    }
+    }
+  }
+};
 </script>
 <style lang='stylus'scoped>
 .countdown

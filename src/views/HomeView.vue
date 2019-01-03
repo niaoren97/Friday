@@ -20,9 +20,17 @@
       hot-sale(myhot="myhot")
     //- 倒计时
     count-down
-    //- 礼拜五特价商品
-    .product
-      product(v-for="item in products" :product="item" myclass="product-item")
+      //- 礼拜五特价商品
+      //- .product
+      //-   product(v-for="i in friday.slice(0,4)",:key="i.id", :product="i", myclass="product-item")
+    swiper(class="swiper-friday", :options="swiperOption")
+      swiper-slide
+        product(v-for="item in friday.slice(0,4)" :product="item" myclass="product-item")
+      swiper-slide
+        product(v-for="item in friday.slice(4,8)" :product="item" myclass="product-item")
+      swiper-slide
+        product(v-for="item in friday.slice(8,12)" :product="item" myclass="product-item")
+      div(class="swiper-pagination", slot="pagination")
     //- 分类展示的商品
     .fruit 
       .left 
@@ -183,7 +191,11 @@ export default {
 
 .swiper-slide
   width 100vw
-
+.swiper-friday
+  overflow-y: auto
+  margin-bottom 20px
+  .swiper-pagination
+    bottom -10px
 .swiper-slide img
   width 100vw
   height 500px

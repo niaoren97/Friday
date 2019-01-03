@@ -4,6 +4,10 @@ module.exports = {
       '^/api': {
         target: 'http://localhost:8000',
       },
+      '^/storage': {
+        target: 'http://localhost:8000',
+      },
+
     },
   },
 }

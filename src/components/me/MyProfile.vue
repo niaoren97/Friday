@@ -4,7 +4,7 @@ panel(title="个人资料")
     .line
       .label 当前头像
       .for 
-        img.avatar(:src="me.avatar || '/static/misc/avatar.png'")
+        img.avatar(:src="avatar", ref="avatarShow")
         label(@click="", for="avatar") 修改
         input.avatar(ref="avatar", id="avatar",type="file", @change="avatarChange")
     .line
@@ -45,6 +45,7 @@ export default {
       birthday: '',
       sex: 0,
       avatarChanged: false,
+      uploadAvatar: '',
     }
   },
   created() {
@@ -56,28 +57,35 @@ export default {
   computed: {
     ...mapState({ me: (s) => s.user.me }),
     avatar() {
+      if (this.uploadAvatar) return this.uploadAvatar
       return this.me.avatar ? this.me.avatar : '/static/misc/avatar.png'
     },
   },
   methods: {
     modifyMobile() {},
     submit() {
-      const payload = {
-        name: this.name,
-        sex: this.sex,
-        birthday: this.birthday,
-      }
+      const payload = new FormData()
+      if (this.birthday) payload.append('birthday', this.birthday)
+      payload.append('name', this.name)
+      payload.append('sex', this.sex)
       if (this.avatarChanged)
-        payload.avatar = this.$refs.avatar.http
-          .withToken(this.me.token)
-          .post('/api/me/profile', payload)
-          .then((res) => {
-            this.$store.commit('user/updateProfile', res.data)
-          })
+        payload.append('avatar', this.$refs.avatar.files[0])
+      http
+        .withToken(this.me.token)
+        .post('/api/me/profile', payload, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        })
+        .then((res) => {
+          this.$store.commit('user/updateProfile', res.data)
+        })
     },
     avatarChange() {
       this.avatarChanged = true
-      this.
+      const url = URL.createObjectURL(this.$refs.avatar.files[0])
+      this.$refs.avatarShow.src = url
+      this.$refs.avatarShow.onload = function() {
+        URL.revokeObjectURL(url)
+      }
     },
   },
 }

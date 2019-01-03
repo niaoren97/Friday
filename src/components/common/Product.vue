@@ -1,11 +1,11 @@
 <template lang='pug'>
   .product(:class='myclass')
     img(:src="product.images[0]")
-    .title {{product.title}}
-    .number {{product.number}}个装
+    .title {{product.name}}
+    .number {{product.specs[0].quantity}}个装
     .price 
       span 礼拜五特价: 
-      span ￥{{product.currentPrice}}
+      span ￥{{(product.specs[0].current_price*product.discount).toFixed(2)}}
 </template>
 <script>
 export default {

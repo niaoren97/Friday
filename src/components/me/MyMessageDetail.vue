@@ -13,7 +13,7 @@ panel
 </template>
 <script>
 import { mapState } from 'vuex'
-import {http} from '@/utils'
+import { http } from '@/utils'
 
 export default {
   name: 'MyMessageDetail',
@@ -21,13 +21,19 @@ export default {
   props: ['message'],
   data() {
     return {
-      realMessage: this.message
+      realMessage: this.message,
     }
   },
   created() {
-    if(!this.message) {
+    if (!this.message) {
       this.fetchMessage()
     }
+    this.readMessage()
+  },
+  watch: {
+    id() {
+      this.readMessage()
+    },
   },
   computed: {
     // ...mapState({ messages: (s) => s.user.me.messages }),
@@ -39,25 +45,34 @@ export default {
     // },
   },
   methods: {
+    readMessage() {
+        http
+          .withToken(this.$store.state.user.me.token)
+          .post('/api/me/message/read', { id: this.id, status: 1 })
+    },
     fetchMessage() {
-      http.withToken(this.$store.state.user.me.token)
-      .get('/api/me/message/'+this.id)
-      .then(res => {
-        this.realMessage = res.data
-      })
-    }
-  }
+      http
+        .withToken(this.$store.state.user.me.token)
+        .get('/api/me/message/' + this.id)
+        .then((res) => {
+          this.realMessage = res.data
+        })
+    },
+  },
 }
 </script>
 <style lang="stylus" scoped>
 .message
   padding 20px
+
   h2
     color green
     text-align center
+
   .date
     text-align right
     padding-right 20px
+
   .detail
     padding-top 20px
 </style>
