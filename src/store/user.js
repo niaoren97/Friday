@@ -34,7 +34,14 @@ export default {
       state.loginStatus = 'ready'
       state.logging = false
       state.me = init
+      window.localStorage.removeItem('user.mobile')
+      window.localStorage.removeItem('user.password')
     },
+    updateProfile(state, payload) {
+      Object.keys(payload).forEach((k) => {
+        Vue.set(state.me, k, payload[k])
+      })
+    }
   },
   actions: {
     // TODO: should support pagination, both server side and client side
@@ -46,13 +53,14 @@ export default {
           state.me.addresses = res.data
         })
     },
-    logout({ state, commit }) {
-      http
-        .withToken(state.me.token)
-        .post('/api/user/logout')
-        .then(() => {
-          commit('logout')
-        })
+    logout({ commit }) {
+      // http
+      //   .withToken(state.me.token)
+      //   .post('/api/user/logout')
+      //   .then(() => {
+      //     commit('logout')
+      //   })
+      commit('logout')
     },
     login({ state, commit }, payload) {
       state.logging = true

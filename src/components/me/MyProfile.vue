@@ -4,9 +4,9 @@ panel(title="个人资料")
     .line
       .label 当前头像
       .for 
-        img.avatar(:src="avatar")
+        img.avatar(:src="me.avatar || '/static/misc/avatar.png'")
         label(@click="", for="avatar") 修改
-        input.avatar(ref="avatar", id="avatar",type="file")
+        input.avatar(ref="avatar", id="avatar",type="file", @change="avatarChange")
     .line
       .label 昵称
       .for 
@@ -21,6 +21,7 @@ panel(title="个人资料")
     .line
       .label 生日
       .for 
+        input(type="date", v-model="birthday")
     .line
       .label 手机
       .for 
@@ -29,62 +30,83 @@ panel(title="个人资料")
     .line
       .label
       .for
-        f-button(@click="commit", big, secondary) 确认提交
+        f-button(@click="submit", big, secondary) 确认提交
 </template>
 <script>
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
+import { http } from '@/utils'
+
 export default {
   name: 'MyProfile',
   data() {
     return {
-      // name: this.me.name,
-      // mobile: this.me.mobile,
       name: '',
       mobile: '',
+      birthday: '',
       sex: 0,
-      me: {avatar: '', mobile: '13681647716', birthday: null,
-      sex: 0, name: ''}
+      avatarChanged: false,
     }
   },
   created() {
-    this.name = this.me.name || this.me.mobile
+    this.name = this.me.name
     this.sex = this.me.sex
+    this.mobile = this.me.mobile
+    this.birthday = this.me.birthday
   },
   computed: {
-    // ...mapState({me: s=>s.user.me})
+    ...mapState({ me: (s) => s.user.me }),
     avatar() {
       return this.me.avatar ? this.me.avatar : '/static/misc/avatar.png'
-    }
+    },
   },
   methods: {
-    modifyMobile() {
-
+    modifyMobile() {},
+    submit() {
+      const payload = {
+        name: this.name,
+        sex: this.sex,
+        birthday: this.birthday,
+      }
+      if (this.avatarChanged)
+        payload.avatar = this.$refs.avatar.http
+          .withToken(this.me.token)
+          .post('/api/me/profile', payload)
+          .then((res) => {
+            this.$store.commit('user/updateProfile', res.data)
+          })
     },
-    commit() {
-
-    }
-  }
+    avatarChange() {
+      this.avatarChanged = true
+      this.
+    },
+  },
 }
 </script>
 <style lang="stylus" scoped>
 .container
   padding 40px
+
   .line
-    padding 10px 
+    padding 10px
+
     .label
       text-align right
       display inline-block
       width 100px
       margin-right 20px
+
     .for
       display inline-block
-label[for="avatar"]
+
+label[for='avatar']
   cursor pointer
   color green
   text-decoration underline
   margin-left 10px
+
 #avatar
   display none
+
 .avatar
   width 76px
   height 76px

@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
+
 import UserModule from './user'
 import CartModule from './cart'
 
@@ -13,4 +15,5 @@ export default new Vuex.Store({
   state: {},
   mutations: {},
   actions: {},
+  plugins: [createPersistedState()],
 })

@@ -49,10 +49,13 @@ $secondary = #F08201
 button
   color #fff
   border none
+  outline none!important
   border-radius 5px
   font-size 16px
   *
     vertical-align middle
+  &:focus, &:hover
+    border solid 2px
   &:disabled
     cursor not-allowed
   &.big
@@ -61,10 +64,11 @@ button
 
   &.primary
     background-color $primary
-
+    border-color  lime
   &.secondary
     background-color $secondary
-
+    border-color orange
   &.gray
     background-color gray
+    border-color #666
 </style>

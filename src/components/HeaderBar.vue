@@ -4,10 +4,14 @@
     .top
       .location 所在城市:{{city}}
       .tabbar  
-        span(v-for="(item,index) in enter" v-if="loggedIn" class="tab")
-          span(v-if="index === 0") 你好,
-          span {{item}}
-          span(v-if="index === 1" @click="toggle()")
+        span(v-if="loggedIn", class="tab")
+          span.center 你好,
+            router-link(to="/me") {{me.name}}
+          span.logout(@click="logout") 退出
+          span
+            router-link(to="/me/orders") 我的订单
+          router-link(to="/me/messages") 我的消息
+          router-link(to="/") 我是商家
         
         //- span(v-for="(item,index) in out" v-if="islogin" class="tab")
         //-   span {{item}}
@@ -18,7 +22,7 @@
         span 400-800-8820
 </template>
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 
 export default {
   name: "HeaderBar",
@@ -30,12 +34,11 @@ export default {
     }
   },
   computed: {
-    ...mapState({loggedIn: s => s.user.loggedIn})
+    ...mapState({loggedIn: s => s.user.loggedIn,
+    me: s => s.user.me})
   },
   methods:{
-    toggle() {
-      this.islogin=!this.islogin
-    }
+    ...mapActions({logout: 'user/logout'})
   }
 }
 </script>
@@ -59,6 +62,13 @@ export default {
   height 17px
 .tab>span 
   margin 0 5px 
+.center
+  a
+    color green
+    &:hover
+      text-decoration underline
+.logout
+  cursor pointer
 .auth
   a
     margin-right 20px
