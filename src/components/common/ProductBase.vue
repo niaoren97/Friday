@@ -22,10 +22,11 @@ export default {
   font-size 16px
   text-align left
 
-.product img
-  width 305px
-  height 305px
-  background-color #f8f6f7
+.product
+  img
+    width 305px
+    height 305px
+    background-color #f8f6f7
 
 .txt
   padding 0 15px
@@ -36,10 +37,16 @@ export default {
 .title
   font-size 20px
   color #333333
+  white-space nowrap
+  text-overflow ellipsis
+  overflow hidden
 
 description
   font-size 14px
   color #8c8c8c
+  white-space nowrap
+  text-overflow ellipsis
+  overflow hidden
 
 .price
   margin 10px 0

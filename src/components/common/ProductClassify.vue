@@ -43,4 +43,8 @@ export default {
 .description
   color #666666
   font-size 15px
+  overflow hidden 
+  white-space nowrap
+  text-overflow ellipsis
+
 </style>

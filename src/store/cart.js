@@ -1,11 +1,20 @@
+import { http } from "@/utils";
+import uuid from "uuid/v1";
+
 export default {
   namespaced: true,
   state: {
-    items: [],
+    items: {},
   },
   mutations: {
-    addItem( ) {
-
-    }
-  }
+    addItem(state, {item}) {
+      if(!item.id) {
+        item.id = uuid;
+      }
+    },
+    removeItem(state, payload) {
+      
+    },
+  },
+  
 }

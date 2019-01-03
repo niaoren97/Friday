@@ -29,6 +29,7 @@ export default {
   background-color #f8f6f7
   box-sizing border-box
   font-size 16px
+  padding 0 10px
 
 .product img
   width 305px

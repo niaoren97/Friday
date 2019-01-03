@@ -18,6 +18,7 @@ export default {
   width 14px
   height 14px
   border solid 1px #D3D3D3
+  background-color #fff
   line-height 0
   padding 2px
   &.checked

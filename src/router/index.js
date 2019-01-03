@@ -12,6 +12,7 @@ import MallProductView from '@/views/MallProductView'
 import NavView from '@/views/NavView'
 import OrderView from '@/views/OrderView'
 import SellerView from '@/views/SellerView'
+import ProductView from '@/views/ProductView'
 
 import NotFoundView from '@/views/404.vue'
 
@@ -21,7 +22,7 @@ import store from '../store'
 
 // test路由
 // import NavBar from '@/base/NavBar.vue'
-import RetrievePasswordCard from '@/components/entry/RetrievePasswordCard.vue'
+import ChoseAddres from '@/components/common/ChoseAddres.vue'
 
 Vue.use(Router)
 
@@ -36,13 +37,14 @@ const router = new Router({
       component: HomeView,
     },
     // test路由接口
-    { path: '/r', component: RetrievePasswordCard },
+    { path: '/c', component: ChoseAddres },
 
     { path: '/login', name: 'login', component: EntryView },
     { path: '/signup', name: 'signup', component: EntryView },
     { path: '/retrieve-password', component: EntryView },
     // 分类商品
     { path: '/category', component: CategoryView },
+    {path: '/product/:id', component: ProductView, name: 'product'},
     // 同城
     { path: '/city', component: CityView },
     // 礼拜五
