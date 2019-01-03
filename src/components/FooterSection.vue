@@ -140,6 +140,9 @@ dd
 .bottom 
   font-size 12px
   padding 20px 0
+  div 
+    margin auto
+    text-align center
 .bottom div:first-child
   color #000000
 .bottom div:last-child

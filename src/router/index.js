@@ -22,7 +22,7 @@ import store from '../store'
 
 // test路由
 // import NavBar from '@/base/NavBar.vue'
-import RetrievePasswordCard from '@/components/entry/RetrievePasswordCard.vue'
+// import RetrievePasswordCard from '@/components/entry/RetrievePasswordCard.vue'
 
 Vue.use(Router)
 
@@ -37,14 +37,14 @@ const router = new Router({
       component: HomeView,
     },
     // test路由接口
-    { path: '/r', component: RetrievePasswordCard },
+    // { path: '/r', component: RetrievePasswordCard },
 
     { path: '/login', name: 'login', component: EntryView },
     { path: '/signup', name: 'signup', component: EntryView },
     { path: '/retrieve-password', component: EntryView },
     // 分类商品
     { path: '/category', component: CategoryView },
-    {path: '/product', component: ProductView},
+    {path: '/product/:id', component: ProductView, name: 'product'},
     // 同城
     { path: '/city', component: CityView },
     // 礼拜五

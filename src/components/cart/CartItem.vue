@@ -1,35 +1,103 @@
-<template lang="pug">
-tr(v-for="item in items", :key="item.id")
-  td
-    check-box(:checked)
-    img(:src="item.product.images[0]")
-    span {{item.product.name}}
-  td {{getSpec(item)}}
-  td {{item.product.price}}
+<template lang='pug'>
+tr.item
   td 
-    button(@click="alterItem(-1)", :disabled="item.quantity===0") -
-    span {{item.quantity}}
-    button(@click="alterItem(1)") +
-  td {{summaryPrice}}
+    check-box 
+    img(:src="products.images")
+    span.digest {{products.digest}}
+  td {{products.specs[0].quantity}}个装
+  td ￥{{products.specs[0].original_price}}
+  td 
+    span.jian(@click='jian()') -
+    span.number {{number}}
+    span.jia(@click="jia()") +
   td
-    span(@click="deleteItem") 删除
+    span.sum {{sum}}
+  td 
+    span.del 删除
+ 
+  
 </template>
 <script>
-import {mapActions} from 'vuex'
+import CheckBox from "@/base/CheckBox.vue";
 export default {
-  name: 'CartItem',
-  props: ['item'],
-  computed: {
-    summaryPrice() {
-      return this.item.product.current_price * this.item.quantity
-    }
+  components: { CheckBox },
+  data() {
+    return {
+      number: 0,
+      sum: 0,
+      products: {
+        images: ["/static/goods/i1.png"],
+        digest: "云南蒙自石榴8个装",
+        specs: [
+          {
+            quantity: 8,
+            original_price: 188
+          }
+        ]
+      }
+    };
   },
   methods: {
-    deleteItem() {
-      this.$store.dispatch('cart/deleteItem', {id: this.item.id})
+    jian() {
+      if (this.number == 0) {
+        return (this.number = 0);
+      }
+      this.number--;
+      this.sum = this.number*this.products.specs[0].original_price;
+    },
+    jia() {
+      this.number++;
+      this.sum = this.number*this.products.specs[0].original_price;
     }
   }
-}
+};
 </script>
-<style lang="stylus" scoped>
+<style lang='stylus' scoped>
+table.f-table
+  .item
+    font-size 18px 
+    padding 10px 0
+    height 120px
+  tr
+    td
+      check-box
+        vertical-align middle
+      img
+        width 80px
+        height 80px
+        margin 0 10px
+        border 1px solid #f2f2f2
+        vertical-align middle
+      .digest
+        vertical-align middle
+    
+    td 
+      .sum 
+        line-height 30px
+
+    // 数量的加减-----------------------------------------
+    td 
+      .jian,.jia 
+        display inline-block
+        width 30px
+        height 30px
+        line-height 30px
+        text-align center
+        background-color #f2f2f2
+        border 1px solid #f2f2f2
+      .number
+        display inline-block
+        width 50px
+        height 30px
+        line-height 30px
+        text-align center
+        background-color #fff
+        border-top 1px solid #f2f2f2
+        border-bottom  1px solid #f2f2f2
+    // 删除操作
+    td 
+      .del 
+        color green 
+        font-size 18px
+    
 </style>

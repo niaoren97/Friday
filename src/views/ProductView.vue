@@ -1,16 +1,16 @@
 <template lang='pug'>
 .content
   .product 
-    magnifier
     .picture
       .big 
-        img(src='static/products/goods1.png')
+        magnifier(:pic='poster')
+        //- img(:src='poster' )
       .lunbo 
         .btn1(@click='pre()') 
-          img(src='static/products/jiantou1.png')
+          img(src='/static/products/jiantou1.png')
         img(v-for='(image,index) in product.images', :src='image', :class='{active:index==id}')
         .btn2(@click='next()')
-          img(src='static/products/jiantou2.png')
+          img(src='/static/products/jiantou2.png')
     .des
       .title {{product.name}}
       .label 
@@ -93,13 +93,18 @@ export default {
       id: 0,
       product: {
         images: [
-          "static/products/goods1.png",
-          "static/products/goods1.png",
-          "static/products/goods1.png",
-          "static/products/goods1.png"
+          // "/static/products/goods1.png",
+          // "/static/products/goods1.png",
+          // "/static/products/goods1.png",
+          // "/static/products/goods1.png"
         ]
       }
     };
+  },
+  computed:{
+    poster() {
+      return this.product.images[this.id]
+    }
   },
   created() {
     axios.get('/api/products/1')
@@ -111,12 +116,12 @@ export default {
     pre() {
       this.id--;
       if (this.id < 0) {
-        this.id = 3;
+        this.id = this.product.images.length-1;
       }
     },
     next() {
       this.id++;
-      if (this.id > 3) {
+      if (this.id > this.product.images.length-1) {
         this.id = 0;
       }
     },
@@ -159,7 +164,6 @@ export default {
 
     .big
       margin-bottom 40px
-
       img
         width 500px
         height 500px

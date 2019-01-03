@@ -32,7 +32,8 @@
       .right
         span 更多&gt;&gt;
     .display
-      product-classify(v-for="item in fruit" :product="item" myclass="product-classify")
+      router-link(:to="{name: 'product', params: {id: item.id}}",v-for="item in fruit", class='todetails' ) 
+        product-classify(:product="item" myclass="product-classify")
 
     .seafood 
       .left 
@@ -42,7 +43,8 @@
       .right
         span 更多&gt;&gt;
     .display
-      product-classify(v-for="item in seafood" :product="item" myclass="product-classify")
+      router-link(:to="{name: 'product', params: {id: item.id}}", v-for="item in seafood",class='todetails')
+        product-classify(:product="item" myclass="product-classify")
 
     .meat 
       .left 
@@ -52,7 +54,8 @@
       .right
         span 更多&gt;&gt;
     .display
-      product-classify(v-for="item in meat" :product="item" myclass="product-classify")
+      router-link(:to="{name: 'product', params: {id: item.id}}", v-for="item in meat",class='todetails') 
+        product-classify(:product="item" myclass="product-classify")
     .egg 
       .left 
         img(src="/static/logo/egg.png")
@@ -61,7 +64,8 @@
       .right
         span 更多&gt;&gt;
     .display
-      product-classify(v-for="item in milk" :product="item" myclass="product-classify")
+      router-link(:to="{name: 'product', params: {id: item.id}}", v-for="item in milk",class='todetails')
+        product-classify(:product="item" myclass="product-classify")
     
 </template>
 <script>
@@ -246,6 +250,12 @@ export default {
 
 .display
   overflow hidden
+
+.todetails
+  display inline-block
+  margin-right 20px
+  &:last-child
+    margin-right 0
 
 .product-classify
   float left
