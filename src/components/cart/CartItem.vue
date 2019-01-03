@@ -26,7 +26,7 @@ export default {
       number: 0,
       sum: 0,
       products: {
-        images: ["/static/goods/i1.png","/static/goods/i1.png"]],
+        images: ["/static/goods/i1.png","/static/goods/i1.png"],
         digest: "云南蒙自石榴8个装",
         specs: [
           {

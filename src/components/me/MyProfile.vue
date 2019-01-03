@@ -75,10 +75,10 @@ export default {
             this.$store.commit('user/updateProfile', res.data)
           })
     },
-    avatarChange() {
-      this.avatarChanged = true
-      this.
-    },
+    // avatarChange() {
+    //   this.avatarChanged = true
+    //   this.
+    // },
   },
 }
 </script>

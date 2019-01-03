@@ -22,7 +22,7 @@ import store from '../store'
 
 // test路由
 // import NavBar from '@/base/NavBar.vue'
-// import RetrievePasswordCard from '@/components/entry/RetrievePasswordCard.vue'
+import ChoseAddres from '@/components/common/ChoseAddres.vue'
 
 Vue.use(Router)
 
@@ -37,7 +37,7 @@ const router = new Router({
       component: HomeView,
     },
     // test路由接口
-    // { path: '/r', component: RetrievePasswordCard },
+    { path: '/c', component: ChoseAddres },
 
     { path: '/login', name: 'login', component: EntryView },
     { path: '/signup', name: 'signup', component: EntryView },

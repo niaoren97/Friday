@@ -28,15 +28,15 @@
         span 现价￥: {{product.specs && product.specs[selected].current_price}}
         span 原价￥: {{product.specs && product.specs[selected].original_price}}
       .guige 请选择规格
-        span(v-for='(item,index) in product.specs', :class='{active_border:selected==index}', @click='select(index)') {{item.quantity}}
+        span(v-for='(item,index) in product.specs', :class='{active_border:selected==index}', @click='select(index)') {{item.quantity}}g
       .number 数量:
         span(class='jian', @click='jian()') -
         span(class='num') {{num}}
         span(class='jia', @click='jia()') +
         span 件
       .cart
-        div(class='tianjia', :class='{active_buy:!cur}', @click='toggle()') 添加购物车
-        div(class='buy', :class='{active_buy:cur}', @click='toggle()')  购买
+        div(class='tianjia', :class='{active_buy:cur==0}', @click='toggle(0), add()') 添加购物车
+        div(class='buy', :class='{active_buy:cur==1}', @click='toggle(1), buy()')  购买
       
       .collection(@click='isShow()')
         img(src='/static/products/starts1.png' v-if='show')
@@ -86,7 +86,7 @@ export default {
   data() {
     return {
       details:true,
-      cur:0,
+      cur:1,
       show:true,
       selected:0,
       num:0,
@@ -135,8 +135,8 @@ export default {
     jia() {
       this.num++;
     },
-    toggle() {
-      this.cur=!this.cur;
+    toggle(n) {
+      this.cur=n;
     },
     select(n) {
       this.selected=n;
