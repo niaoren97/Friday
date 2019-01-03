@@ -25,6 +25,18 @@
 <script>
 export default {
   name: 'UserCenter',
+  computed: {
+    loggedIn() {
+      return this.$store.state.user.loggedIn
+    }
+  },
+  watch: {
+    loggedIn() {
+      if(!this.loggedIn) {
+        this.$router.push('/')
+      }
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>

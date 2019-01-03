@@ -1,6 +1,7 @@
 import UserCenter from '@/views/UserCenter'
 import MyAccount from '@/components/me/MyAccount'
 import MyOrder from '@/components/me/MyOrder'
+import MyOrderDetail from '@/components/me/MyOrderDetail'
 import MyPoint from '@/components/me/MyPoint'
 import MyPointOrder from '@/components/me/MyPointOrder'
 import MyWallet from '@/components/me/MyWallet'
@@ -21,8 +22,9 @@ export default {
   meta: { requiresAuth: process.env.VUE_APP_STAGE === 'play' ? false : true },
   children: [
     { path: 'account', component: MyAccount, alias: '' },
-    { path: 'orders', component: MyOrder },
-    { path: 'orders/:filter', component: MyOrder },
+    { path: 'orders', redirect: 'orders/all' },
+    { path: 'order/:id', component: MyOrderDetail, name: 'order-detail' },
+    { path: 'orders/:filter', component: MyOrder, name: 'my-orders' },
     { path: 'points', component: MyPoint },
     { path: 'point-orders', component: MyPointOrder },
     { path: 'wallet', component: MyWallet },
@@ -36,16 +38,9 @@ export default {
     {
       path: 'messages',
       component: MyMessage,
-      // children: [
-      //   {
-      //     path: ':mid',
-      //     name: 'message-detail',
-      //     component: MyMessageDetail,
-      //   },
-      // ],
     },
     {
-      path: 'messages/:mid',
+      path: 'message/:id',
       component: MyMessageDetail,
       name: 'message-detail',
     },

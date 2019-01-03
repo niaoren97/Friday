@@ -18,7 +18,8 @@ export default {
     ToolBox,
   },
   computed: {
-    ...mapState({loggedIn: s=>s.user.loggedIn}),
+    ...mapState({loggedIn: s=>s.user.loggedIn,
+    me: s=>s.user.me}),
     page() {
       return this.$route.path.split('/')[1]
     },
