@@ -4,7 +4,7 @@ f-table
   thead
     tr.head
       th.one
-        check-box
+        check-box(:checked="checked")
         span 店铺名称
       th 规格
       th 单价
@@ -29,21 +29,29 @@ f-table
   
 </template>
 <script>
-import CartItem from "@/components/cart/CartItem.vue";
+import CartItem from '@/components/cart/CartItem.vue'
 export default {
   components: { CartItem },
-  props: ["items"],
+  props: ['items'],
   data() {
     return {
-      total: "999.99"
-    };
+      // total: "999.99"
+    }
   },
   computed: {
     total: function() {
-       
+      return this.items
+        .filter((i) => i.checked)
+        .reduce((sum, i) => sum + i.spec.current_price * i.quantity, 0).toFixed(2)
+    },
+    checked() {
+      return !this.items.some(i => !i.checked)
     }
+  },
+  methods: {
+    // toggle
   }
-};
+}
 </script>
 <style lang='stylus' scoped>
 table.f-table
