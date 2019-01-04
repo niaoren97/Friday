@@ -19,8 +19,7 @@ export default {
   },
   actions: {
     search({state, commit}) {
-      axios.get('/api/search', {params: {q: state.query,
-      }})
+      // axios.get('/api/search', {params: {q: state.query, } })
     }
   },
 }
