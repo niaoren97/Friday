@@ -11,6 +11,7 @@ import MallView from '@/views/MallView'
 import MallProductView from '@/views/MallProductView'
 import NavView from '@/views/NavView'
 import OrderView from '@/views/OrderView'
+import SearchResultView from '@/views/SearchResultView'
 import SellerView from '@/views/SellerView'
 import ProductView from '@/views/ProductView'
 
@@ -44,7 +45,8 @@ const router = new Router({
     { path: '/retrieve-password', component: EntryView },
     // 分类商品
     { path: '/category', component: CategoryView },
-    {path: '/product/:id', component: ProductView, name: 'product'},
+    { path: '/search', component: SearchResultView , name: 'search'},
+    { path: '/product/:id', component: ProductView, name: 'product' },
     // 同城
     { path: '/city', component: CityView },
     // 礼拜五
