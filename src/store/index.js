@@ -5,6 +5,7 @@ import createPersistedState from 'vuex-persistedstate'
 import UserModule from './user'
 import CartModule from './cart'
 import CategoryModule from './category'
+import SearchModule from './search'
 
 Vue.use(Vuex)
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
     user: UserModule,
     cart: CartModule,
     category: CategoryModule,
+    search: SearchModule,
   },
   state: {},
   mutations: {},

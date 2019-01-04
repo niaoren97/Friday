@@ -1,11 +1,11 @@
 <template lang='pug'>
-  .product(:class='myclass')
-    img(:src="product.images[0]")
-    .title {{product.name}}
-    .number {{product.specs[0].quantity}}个装
-    .price 
-      span 礼拜五特价: 
-      span ￥{{(product.specs[0].current_price*product.discount).toFixed(2)}}
+.product(:class='myclass')
+  img(:src="product.images[0]")
+  .title {{product.name}}
+  .number {{product.specs[0].quantity}}个装
+  .price 
+    span 礼拜五特价: 
+    span ￥{{(product.specs[0].current_price*product.discount).toFixed(2)}}
 </template>
 <script>
 export default {
@@ -29,7 +29,6 @@ export default {
   background-color #f8f6f7
   box-sizing border-box
   font-size 16px
-  padding 0 10px
 
 .product img
   width 305px
