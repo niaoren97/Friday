@@ -51,10 +51,13 @@ export default {
       commit('addItem', { item })
       http
         .withToken(rootState.user.me.token)
-        .post('/api/me/cart/add', {item: {product_id: item.product.id,
-          spec: item.spec.quantity,
-          quantity: item.quantity,
-        }})
+        .post('/api/me/cart/add', {
+          item: {
+            product_id: item.product.id,
+            spec: item.spec.quantity,
+            quantity: item.quantity,
+          },
+        })
         .then((res) => {
           const { id } = res.data
           // const { id } = res.data.id
@@ -62,7 +65,7 @@ export default {
           Vue.delete(state.items, itemId)
         })
     },
-    removeItems({commit}, items) {
+    removeItems({ commit }, items) {
       commit('removeItems', items)
       // removeItems(state, items)
     },
