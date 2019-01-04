@@ -32,11 +32,16 @@ f-table
 import CartItem from "@/components/cart/CartItem.vue";
 export default {
   components: { CartItem },
-  props:['items'],
+  props: ["items"],
   data() {
     return {
       total: "999.99"
     };
+  },
+  computed: {
+    total: function() {
+       
+    }
   }
 };
 </script>

@@ -50,22 +50,22 @@ const router = new Router({
     // 同城
     { path: '/city', component: CityView },
     // 礼拜五
-    { path: '/friday', component: FridayView },
+    { path: '/friday', component: FridayView, name:"friday" },
     // 积分商城
     { path: '/mall', component: MallView },
-    { path: '/mall/product', component: MallProductView },
+    { path: '/mall/product', component: MallProductView, name:'mall' },
     // TODO:
     // 商家
-    { path: '/seller/:sid', component: SellerView },
+    { path: '/seller/:sid', component: SellerView, name:'seller' },
     // 购物车
     {
       path: '/cart',
-      component: CartView,
+      component: CartView, name: 'cart',
       requiresAuth: process.env.VUE_APP_STAGE === 'play' ? false : true,
     },
-    { path: '/cart/order/:oid', component: OrderView },
+    { path: '/cart/order/:oid', component: OrderView, name: 'order' },
     // 导航
-    { path: '/nav', component: NavView },
+    { path: '/nav', component: NavView, name:'nav' },
     MeRouter,
     // 关于礼拜五
     { path: '/about', component: AboutView },
