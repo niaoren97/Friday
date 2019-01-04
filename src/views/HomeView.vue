@@ -87,7 +87,7 @@ export default {
     return {
       swiperOption: {
         autoplay: {
-          delay: 4500,
+          delay: 5000,
           disableOnInteraction: false,
         },
         pagination: {
@@ -227,6 +227,13 @@ export default {
 
 .product-item:last-child
   margin-right 0
+// 商品展示轮播效果
+// .swiper-friday
+//   width 1280px
+//   swiper-slide
+//     product
+//       w300px
+
 
 // 分类商品展示css
 .fruit, .seafood, .meat, .egg

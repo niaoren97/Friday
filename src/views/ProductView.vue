@@ -35,8 +35,10 @@
         span(class='jia', @click='jia()') +
         span 件
       .cart
-        div(class='tianjia', :class='{active_buy:cur==0}', @click='toggle(0), add()') 添加购物车
-        div(class='buy', :class='{active_buy:cur==1}', @click='toggle(1), buy()')  购买
+        router-link(:to="{name:'cart'}") 
+          div(class='tianjia', :class='{active_buy:cur==0}', @click='toggle(0), add()') 添加购物车
+        router-link(:to="{name:'order'}") 
+          div(class='buy', :class='{active_buy:cur==1}', @click='toggle(1), buy()')  购买
       
       .collection(@click='isShow()')
         img(src='/static/products/starts1.png' v-if='show')
@@ -302,6 +304,8 @@ export default {
       display inline-block
       
       .tianjia,.buy
+        &:hover 
+          background-color #f08200
         display inline-block
         margin 0 10px
         border-radius 5px

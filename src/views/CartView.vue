@@ -18,6 +18,7 @@ export default {
   name: "CartView",
   computed: {
     ...mapState({ items: s => s.cart.items }),
+    // 根据商品的店铺分类,不同店铺的商品分别分组.
     groups() {
       // return items grouped by seller
       return (groupBy(this.items, item => item.seller.id));
