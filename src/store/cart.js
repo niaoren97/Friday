@@ -51,7 +51,10 @@ export default {
       commit('addItem', { item })
       http
         .withToken(rootState.user.me.token)
-        .post('/api/me/cart/add', payload)
+        .post('/api/me/cart/add', {item: {product_id: item.product.id,
+          spec: item.spec.quantity,
+          quantity: item.quantity,
+        }})
         .then((res) => {
           const { id } = res.data
           // const { id } = res.data.id

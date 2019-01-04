@@ -12,7 +12,7 @@ f-table
       th 金额
       th 操作
   tbody
-    cart-item
+    cart-item(v-for="item in items", :key="item.key", :item="item")
   tfoot
     tr.foot 
       th.one
@@ -29,44 +29,50 @@ f-table
   
 </template>
 <script>
-import FTable from "@/base/FTable.vue"
-import CartItem from "@/components/cart/CartItem.vue"
-import CheckBox from "@/base/CheckBox.vue"
+import CartItem from "@/components/cart/CartItem.vue";
 export default {
-   components:{FTable,CartItem,CheckBox},
-   data() {
-     return {
-       total:'999.99'
-     }
-   }
-}
+  components: { CartItem },
+  props:['items'],
+  data() {
+    return {
+      total: "999.99"
+    };
+  }
+};
 </script>
 <style lang='stylus' scoped>
 table.f-table
-  tfoot 
-    .foot 
+  tfoot
+    .foot
       height 120px
-.one 
-  text-align left 
-  padding-left 30px 
-  width 40%   
-  span 
+
+.one
+  text-align left
+  padding-left 30px
+  width 40%
+
+  span
     margin-left 10px
-.all 
+
+.all
   font-size 16px
   font-weight 500
   color green
-.batch 
+
+.batch
   font-size 16px
   font-weight 500
   color green
-.total 
+
+.total
   font-size 16px
   font-weight 500
+
 .totalmoney
   font-size 20px
   color #f00
-.now 
+
+.now
   display inline-block
   margin-left 20px
   width 100px

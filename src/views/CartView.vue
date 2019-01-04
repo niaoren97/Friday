@@ -1,12 +1,12 @@
 <template lang="pug">
 .content.cart-view
-  .main(v-if="!items.length")
+  .main(v-if="items.length===0")
     p 你还没有商品
   .main(v-else)
     .logo
       img(src="/static/logo/cart2.png")
       span 购物车
-    cart-group
+    cart-group(v-for="(items, k) in groups", :items="items", :key="k")
     
 </template>
 <script>
@@ -17,17 +17,17 @@ import CartGroup from "@/components/cart/CartGroup.vue";
 export default {
   name: "CartView",
   computed: {
-    // ...mapState({ items: s => s.cart.items }),
+    ...mapState({ items: s => s.cart.items }),
     groups() {
       // return items grouped by seller
-      return groupBy(this.items, item => item.seller.id);
+      return (groupBy(this.items, item => item.seller.id));
     }
   },
   data() {
     return {
-      items: [
-        1
-      ]
+      // items: [
+      //   1
+      // ]
     };
   },
   components: { CartGroup }

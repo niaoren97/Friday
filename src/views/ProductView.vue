@@ -149,6 +149,15 @@ export default {
     },
     change() {
       this.details=!this.details;
+    },
+    add() {
+      this.$store.dispatch('cart/addItem',{item: {
+        product: this.product,
+        quantity: this.num,
+        spec: this.product.specs[this.selected],
+        checked: true,
+        seller: this.product.seller
+      }})
     }
   }
 };

@@ -2,10 +2,10 @@
 tr.item
   td.one 
     check-box 
-    img(:src="products.images")
-    span.digest {{products.digest}}
-  td {{products.specs[0].quantity}}个装
-  td ￥{{products.specs[0].original_price}}
+    img(:src="item.product.images[0]")
+    span.digest {{item.product.digest}}
+  td {{item.product.specs[0].quantity}}个装
+  td ￥{{item.product.specs[0].original_price}}
   td 
     span.jian(@click='jian()') -
     span.number {{number}}
@@ -21,20 +21,21 @@ tr.item
 import CheckBox from "@/base/CheckBox.vue";
 export default {
   components: { CheckBox },
+  props:['item'],
   data() {
     return {
-      number: 0,
-      sum: 0,
-      products: {
-        images: ["/static/goods/i1.png","/static/goods/i1.png"],
-        digest: "云南蒙自石榴8个装",
-        specs: [
-          {
-            quantity: 8,
-            original_price: 188
-          }
-        ]
-      }
+      // number: 0,
+      // sum: 0,
+      // products: {
+      //   images: ["/static/goods/i1.png","/static/goods/i1.png"],
+      //   digest: "云南蒙自石榴8个装",
+      //   specs: [
+      //     {
+      //       quantity: 8,
+      //       original_price: 188
+      //     }
+      //   ]
+      // }
     };
   },
   methods: {
@@ -79,6 +80,7 @@ table.f-table
     td 
       .jian,.jia 
         display inline-block
+        vertical-align bottom 
         width 30px
         height 30px
         line-height 30px
@@ -87,6 +89,7 @@ table.f-table
         border 1px solid #f2f2f2
       .number
         display inline-block
+        vertical-align bottom 
         width 50px
         height 30px
         line-height 30px
