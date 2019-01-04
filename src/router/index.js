@@ -21,6 +21,8 @@ import MeRouter from './me'
 
 import store from '../store'
 
+// 刚的页面路由
+import Fresh from '@/components/about/Fresh.vue'
 // test路由
 // import NavBar from '@/base/NavBar.vue'
 import ChoseAddres from '@/components/common/ChoseAddres.vue'
@@ -70,6 +72,8 @@ const router = new Router({
     // 关于礼拜五
     { path: '/about', component: AboutView },
     { path: '*', component: NotFoundView },
+    // 优鲜保障
+    { path: 'fresh', component: Fresh, name:'fresh' }
   ],
 })
 

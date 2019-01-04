@@ -43,4 +43,6 @@ export default {
 .price span:last-child 
   color #ff6666  
   font-size 20px  
+.title,.number,.price
+  padding-left 20px
 </style>

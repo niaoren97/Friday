@@ -23,13 +23,13 @@
       //- 礼拜五特价商品
       //- .product
       //-   product(v-for="i in friday.slice(0,4)",:key="i.id", :product="i", myclass="product-item")
-    swiper(class="swiper-friday", :options="swiperOption")
-      swiper-slide
-        product(v-for="item in friday.slice(0,4)" :product="item" myclass="product-item")
-      swiper-slide
-        product(v-for="item in friday.slice(4,8)" :product="item" myclass="product-item")
-      swiper-slide
-        product(v-for="item in friday.slice(8,12)" :product="item" myclass="product-item")
+    swiper.self(class="swiper-friday", :options="swiperOption")
+      swiper-slide.self_imgs
+        product.self_img(v-for="item in friday.slice(0,4)" :product="item" myclass="product-item")
+      swiper-slide.self_imgs
+        product.self_img(v-for="item in friday.slice(4,8)" :product="item" myclass="product-item")
+      swiper-slide.self_imgs
+        product.self_img(v-for="item in friday.slice(8,12)" :product="item" myclass="product-item")
       div(class="swiper-pagination", slot="pagination")
     //- 分类展示的商品
     .fruit 
@@ -282,4 +282,10 @@ export default {
 
   &:last-child
     margin-right 0
+.self  
+  width 1280px
+  height 435px
+.self_img 
+  width 300px
+  height 440px
 </style>

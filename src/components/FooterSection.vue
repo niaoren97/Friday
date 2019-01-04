@@ -3,35 +3,41 @@
   .content
     .top 
       .items
-        .item
-          img(src="/static/logo/zpbz.png")
-          span 优先保障
-        .item
-          img(src="/static/logo/zpbz.png")
-          span 优先保障
-        .item
-          img(src="/static/logo/zpbz.png")
-          span 优先保障
-        .item
-          img(src="/static/logo/zpbz.png")
-          span 优先保障
-        .item
-          img(src="/static/logo/zpbz.png")
-          span 优先保障
+        router-link(:to="{name:'fresh'}")
+          .item
+            img(src="/static/logo/zpbz.png")
+            span 优先保障
+        router-link(:to="{name:'fresh'}")
+          .item
+            img(src="/static/logo/qcjk.png")
+            span 全程监控
+        router-link(:to="{name:'fresh'}")
+          .item
+            img(src="/static/logo/jxth.png")
+            span 礼拜五特惠
+        router-link(:to="{name:'fresh'}")
+          .item
+            img(src="/static/logo/zg.png")
+            span 基地直供
+        router-link(:to="{name:'fresh'}")
+          .item
+            img(src="/static/logo/clock.png")
+            span 准时送达
   .line
   .content
       .middle
-        .l 
-          img(src="static/logo/logo.png")
-          div 服务时间 8:00-22:00
-            img(class="phone" src="static/logo/telphone.png")
-            span 400-800-8200
+        router-link(:to="{name:'home'}")
+          .l 
+            img(src="/static/logo/logo.png")
+            div 服务时间 8:00-22:00
+              img(class="phone" src="/static/logo/telphone.png")
+              span 400-800-8200
         .c 
           div 
-            img(src="static/logo/QR code.png")
+            img(src="/static/logo/QR code.png")
             p 礼拜五官方微信
           div 
-            img(src="static/logo/QR code.png")
+            img(src="/static/logo/QR code.png")
             p 礼拜五官方微信
         .r 
           dl 
@@ -151,4 +157,9 @@ dd
 .line 
    border-top 1px solid #dddddd
    width 100%
+dt:hover 
+  color #f00
+dd:hover 
+  color #f08200
+  
 </style>
