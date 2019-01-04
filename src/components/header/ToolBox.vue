@@ -1,5 +1,5 @@
 <template lang="pug">
-.container
+.tool-box
   router-link(to="/me")
     span.tool 
       img(src="/static/logo/user.png")
@@ -24,6 +24,9 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+.tool-box
+  display inline-block
+  vertical-align middle
 .tool
   display inline-block
   width 120px
@@ -33,16 +36,18 @@ export default {
   text-align center
   line-height 40px
   position relative
+  padding 0 10px
+  margin-left 20px
   *
-    padding 0 10px
     vertical-align middle
   .bubble
     position absolute
+    line-height 22px
     width 22px
     height 22px
     background #F08200
     border-radius 3px
     color #fff
-    left 20px
-    top -10px
+    left 45px
+    top -13px
 </style>

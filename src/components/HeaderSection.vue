@@ -3,7 +3,7 @@
   router-link(to="/")
     img(src="/static/logo/logo.png" class='logo')
   span(v-if="isEntry") | {{subtitle}}
-  div(v-else)
+  .fr(v-else)
     search-box
     tool-box(v-if="loggedIn")
 </template>
