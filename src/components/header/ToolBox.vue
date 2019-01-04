@@ -18,7 +18,7 @@ export default {
   computed: {
     ...mapState({items: s => s.cart.items}),
     quantity() {
-      return this.items.reduce((s, i) => s + i.quantity, 0)
+      return Object.values(this.items).reduce((s, i) => s + i.quantity, 0)
     }
   }
 }

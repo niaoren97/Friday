@@ -22,5 +22,8 @@ function install() {
     if (flag) return v > 0 ? `+${v}` : `-${v}`
     return v
   })
+  Vue.filter('toInt', function(v, d) {
+    return parseInt(v, d || 10)
+  })
 }
 export default install

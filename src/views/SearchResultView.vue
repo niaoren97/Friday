@@ -5,8 +5,10 @@
   .fetching(v-if="fetching")  
     img(src="/static/misc/cog.png", class="cog")
     span 正在搜索
-  .search-results
-    product(v-for="p in results", :key="p.id", :product="p")
+  .search-results.clearfix
+    router-link(:to="{name: 'product', params:{id: p.id}}", v-for="p in results",:key="p.id")
+      product( , :product="p", myclass="product")
+  paginator(:base="$route.path",:current="page | toInt", :last="last" )
 </template>
 <script>
 import Product from '@/components/common/Product'
@@ -18,8 +20,7 @@ export default {
     Product,
   },
   data() {
-    return {fetching: false,
-    results: []}
+    return { fetching: false, results: [], last: 0 }
   },
   created() {
     // const {q, categories, sort, filter} = this.$route.query
@@ -28,33 +29,51 @@ export default {
   computed: {
     // q, categories, sort, filter
     // keyword() {
-    //   return 
+    //   return
     // }
+    page() {
+      return this.$route.query.page || 1
+    },
   },
-  watch: {
-
-  },
+  watch: {},
   methods: {
     search(query) {
       this.fetching = true
-      axios.get('/api/search', {params: query})
-      .then(res => {
+      axios.get('/api/search', { params: query }).then(({ data }) => {
         this.fetching = false
-        this.results = res.data
+        this.results = data.data
+        this.last = data.last_page
       })
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="stylus" scoped>
 .results
   margin auto
   min-height 500px
+
 .none
   text-align center
   line-height 500px
+
 .fetching
   text-align center
+
+.product
+  float left
+  margin-right 20px
+a:nth-child(4n)
+  .product
+    margin-right 0
+
 .cog
   animation rotate infinite 1s linear
+
+@keyframes rotate
+  from
+    transform rotateZ(0deg)
+
+  to
+    transform rotateZ(360deg)
 </style>
