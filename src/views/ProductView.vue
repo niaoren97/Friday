@@ -61,7 +61,7 @@
     .comments_left
       .avatar
         img(src='/static/products/touxiang.png')
-        .phone 13166666688
+        .phone 1316****688
     .comments_right
       .starts
         img(src='/static/products/starts2.png')

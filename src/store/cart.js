@@ -3,6 +3,7 @@ import Vue from 'vue'
 // import uuid from 'uuid/v1'
 let id = 1
 export default {
+  //命名空间
   namespaced: true,
   state: {
     items: {},

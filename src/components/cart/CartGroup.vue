@@ -26,10 +26,6 @@ f-table
         span.total 商品总计:
         span.totalmoney ￥{{total}}
         span.now 立即购买
-
-    
-    
-
   
 </template>
 <script>

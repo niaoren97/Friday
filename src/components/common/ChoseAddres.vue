@@ -9,7 +9,8 @@
     p.city
       span.start *
       span 所在地区:
-      input(placeholder="地区")
+      //- 三级联动组件-------
+      Addr
     p.des
       span.start *
       span 详细地址:
@@ -29,8 +30,10 @@
 </template>
 <script>
 import CheckBox from "@/base/CheckBox.vue"
+import Addr from "@/components/common/Addr.vue"
+
 export default {
-  components: [CheckBox]
+  components:{ CheckBox,Addr }
 }
 </script>
 <style lang='stylus' scoped>
@@ -67,6 +70,9 @@ export default {
       input
         width 330px
         height 35px
+    .city 
+      Addr
+        display inline
     .des
       input 
         width 460px
@@ -96,5 +102,6 @@ export default {
         background-color #f08200
       .back
         background-color #999999
+    
         
 </style>
