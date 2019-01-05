@@ -1,6 +1,7 @@
 <template lang='pug'>
 .product(:class="myclass")
-  img(:src="product.images[0]")
+  router-link(:to="{name: 'product', params: {id: product.id}}") 
+    img(:src="product.images[0]")
   .txt
     .title {{product.name}}
     .description

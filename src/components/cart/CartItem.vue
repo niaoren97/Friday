@@ -1,20 +1,19 @@
 <template lang='pug'>
 tr.item
   td.one 
-    check-box(v-model="item.checked", @click="toggle") 
+    check-box(:value="item.checked", @input="toggle") 
     img(:src="item.product.images[0]")
     span.digest {{item.product.digest}}
   td {{item.spec.quantity}}个装
   td ￥{{item.spec.current_price}}
   td 
-    button.jian(@click='alter({id: item.id, change: -1})', :disabled="item.quantity<=0") -
+    button.jian(@click='itemAlter(-1)', :disabled="item.quantity<=0") -
     span.number {{item.quantity}}
-    button.jia(@click="alter({id: item.id, change: 1})") +
+    button.jia(@click="itemAlter(1)") +
   td
     span.sum {{sum | currency('cn')}}
   td 
     span.del(@click="del()") 删除
- 
   
 </template>
 <script>
@@ -30,7 +29,11 @@ export default {
   },
   methods: {
     ...mapActions({ alter: 'cart/alterItem' }),
+    itemAlter(change) {
+      this.alter({id: this.item.id, change})
+    },
     toggle() {
+      // alert('l');
       this.$store.commit('cart/setChecked', {
         id: this.item.id,
         checked: !this.item.checked,

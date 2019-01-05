@@ -41,7 +41,7 @@ export default {
       Object.keys(payload).forEach((k) => {
         Vue.set(state.me, k, payload[k])
       })
-    }
+    },
   },
   actions: {
     // TODO: should support pagination, both server side and client side
@@ -62,7 +62,7 @@ export default {
       //   })
       commit('logout')
     },
-    login({ state, commit }, payload) {
+    login({ state, commit, dispatch }, payload) {
       state.logging = true
       state.loginMessage = ''
       setTimeout(() => {
@@ -88,6 +88,8 @@ export default {
               state.loginMessage = ''
               state.loginStatus = 'ok'
               commit('login', data)
+              // and fetch user favortes
+              dispatch('favorite/fetchFavorites', {}, { root: true })
             })
             .catch((err) => {
               state.logging = false

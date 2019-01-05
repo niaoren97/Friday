@@ -28,11 +28,18 @@ import Fresh from '@/components/about/Fresh.vue'
 import ChoseAddres from '@/components/common/ChoseAddres.vue'
 
 Vue.use(Router)
-
+function scrollHandler(to, from, savedPosition) {
+  if (savedPosition) {
+    return savedPosition
+  }
+  return { x: 0, y: 0 }
+}
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [{
+  scrollBehavior: scrollHandler,
+  routes: [
+    {
       path: '/home',
       alias: '/',
       name: 'home',
@@ -59,48 +66,22 @@ const router = new Router({
       component: EntryView
     },
     // 分类商品
-    {
-      path: '/category',
-      component: CategoryView
-    },
-    {
-      path: '/search',
-      component: SearchResultView,
-      name: 'search'
-    },
-    {
-      path: '/product/:id',
-      component: ProductView,
-      name: 'product'
-    },
+    { path: '/category', component: CategoryView },
+    { path: '/search', component: SearchResultView, name: 'search' },
+    { path: '/product/:id', component: ProductView, name: 'product' },
     // 同城
     {
       path: '/city',
       component: CityView
     },
     // 礼拜五
-    {
-      path: '/friday',
-      component: FridayView,
-      name: "friday"
-    },
+    { path: '/friday', component: FridayView, name: 'friday' },
     // 积分商城
-    {
-      path: '/mall',
-      component: MallView
-    },
-    {
-      path: '/mall/product',
-      component: MallProductView,
-      name: 'mall'
-    },
+    { path: '/mall', component: MallView },
+    { path: '/mall/product', component: MallProductView, name: 'mall' },
     // TODO:
     // 商家
-    {
-      path: '/seller/:sid',
-      component: SellerView,
-      name: 'seller'
-    },
+    { path: '/seller/:sid', component: SellerView, name: 'seller' },
     // 购物车
     {
       path: '/cart',
@@ -114,11 +95,7 @@ const router = new Router({
       name: 'order'
     },
     // 导航
-    {
-      path: '/nav',
-      component: NavView,
-      name: 'nav'
-    },
+    { path: '/nav', component: NavView, name: 'nav' },
     MeRouter,
     // 关于礼拜五
     // 优鲜保障

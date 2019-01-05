@@ -4,8 +4,8 @@ f-table
   thead
     tr.head
       th.one
-        check-box(:checked="checked")
-        span 店铺名称
+        check-box(:value="checked", @input="toggleAll")
+        span 店铺名称 {{seller.name}}
       th 规格
       th 单价
       th 数量
@@ -16,16 +16,13 @@ f-table
   tfoot
     tr.foot 
       th.one
-        span.all 全选
-        span.batch 批量删除
       th 
       th
       th
       th 
       th 
-        span.total 商品总计:
+        span.total 商品金额:
         span.totalmoney ￥{{total}}
-        span.now 立即购买
   
 </template>
 <script>
@@ -44,12 +41,18 @@ export default {
         .filter((i) => i.checked)
         .reduce((sum, i) => sum + i.spec.current_price * i.quantity, 0).toFixed(2)
     },
+    seller() {
+      return this.items[0].seller
+    },
     checked() {
       return !this.items.some(i => !i.checked)
     }
   },
   methods: {
-    // toggle
+    toggleAll() {
+      this.$store.commit('cart/setChecked', {items: this.items.map(i => i.id),
+      checked: !this.checked});
+    }
   }
 }
 </script>

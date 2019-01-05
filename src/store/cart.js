@@ -23,9 +23,19 @@ export default {
     },
     alterItem(state, { id, change }) {
       state.items[id].quantity += change
+      if (state.items[id].quantity <= 0) {
+        state.items[id].quantity = 0
+        state.items[id].checked = false 
+      }
     },
-    setChecked(state, { id, checked }) {
-      state.items[id].checked = checked
+    setChecked(state, payload) {
+      if (payload.id) {
+        const { id, checked } = payload
+        state.items[id].checked = checked
+      } else {
+        const { items, checked } = payload
+        items.forEach((id) => (state.items[id].checked = checked))
+      }
     },
     removeItem(state, { id }) {
       Vue.delete(state.items, id)
@@ -77,6 +87,7 @@ export default {
         .then((res) => {
           const { id } = res.data
           // const { id } = res.data.id
+          state.items[itemId].id = id
           Vue.set(state.items, id, state.items[itemId])
           Vue.delete(state.items, itemId)
         })

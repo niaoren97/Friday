@@ -46,12 +46,12 @@ class Toast {
   static config({ duration }) {
     Toast.config.duration = duration
   }
-  static present({ message, action  }) {
+  static present({ message, action }) {
     const toast = document.createElement('div')
     toast.classList.add('__toast')
     toast.innerHTML = message
     if (action) {
-      const {fn, title} = action
+      const { fn, title } = action
       const button = document.createElement('button')
       button.innerText = title
       button.onclick = fn()
@@ -70,3 +70,4 @@ const plugin = {
   },
 }
 export default plugin
+export { Toast }
