@@ -8,7 +8,7 @@
       .lunbo 
         .btn1(@click='pre()') 
           img(src='/static/products/jiantou1.png')
-        img(v-for='(image,index) in product.images', :src='image', :class='{active:index==id}')
+        img(v-for='(image,index) in product.images', :src='image', :class='{active:index==id}', @click="selectImage(index)")
         .btn2(@click='next()')
           img(src='/static/products/jiantou2.png')
     .des
@@ -35,10 +35,9 @@
         span(class='jia', @click='jia()') +
         span 件
       .cart
-        router-link(:to="{name:'cart'}") 
-          div(class='tianjia', :class='{active_buy:cur==0}', @click='clickCart()') 
-            span(v-if="isInCart") 已添加至购物车
-            span(v-else) 添加购物车
+        div(class='tianjia', :class='{active_buy:cur==0}', @click='clickCart()') 
+          span(v-if="isInCart") 已添加至购物车
+          span(v-else) 添加购物车
         router-link(:to="{name:'order'}") 
           div(class='buy', :class='{active_buy:cur==1}', @click=' buy()')  购买
       
@@ -118,7 +117,8 @@ export default {
     },
   },
   created() {
-    axios.get('/api/products/1').then((res) => {
+    const pid = this.$route.params.id
+    axios.get(`/api/products/${pid}`).then((res) => {
       this.product = res.data
     })
   },
@@ -134,6 +134,9 @@ export default {
       if (this.id > this.product.images.length - 1) {
         this.id = 0
       }
+    },
+    selectImage(i) {
+      this.id = i
     },
     jian() {
       if (this.num == 0) {

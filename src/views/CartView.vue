@@ -7,7 +7,15 @@
       img(src="/static/logo/cart2.png")
       span 购物车
     cart-group(v-for="(items, k) in groups", :items="items", :key="k")
-    
+    .footer
+      .group-actions
+        span.all(@click="selectAll") 全选
+        span.batch(@click="deleteSelected") 批量删除
+      .group-info
+        span 商品总计: 
+          span.price {{totalPrice | currency('cn')}}
+        f-button(big, secondary, @click="buy") 立即购买
+
 </template>
 <script>
 import { mapState } from 'vuex'
@@ -16,11 +24,25 @@ import CartGroup from '@/components/cart/CartGroup.vue'
 
 export default {
   name: 'CartView',
+  data() {
+    return {}
+  },
+  components: { CartGroup },
+  created() {
+    if (!this.loggedIn) {
+      this.$router.push('/login')
+    }
+  },
   computed: {
     ...mapState({
       items: (s) => s.cart.items,
     }),
-
+    totalPrice() {
+      return Object.values(this.items)
+        .filter((i) => i.checked)
+        .reduce((sum, i) => sum + i.quantity * i.spec.current_price, 0)
+        .toFixed(2)
+    },
     loggedIn() {
       return this.$store.state.user.loggedIn
     },
@@ -30,26 +52,27 @@ export default {
       return groupBy(this.items, (item) => item.seller.id)
     },
   },
-  data() {
-    return {}
-  },
-  created() {
+  methods: {
+    buy() {
+      this.$route.push('/cart/confirm')
+    },
+    selectAll() {
 
-      if(!this.loggedIn) {
-        this.$router.push('/login')
-      }
+    },
+    deleteSelected() {
+
+    }
   },
   watch: {
     loggedIn() {
-      if(!this.loggedIn) {
+      if (!this.loggedIn) {
         this.$router.push('/login')
       }
-    }
+    },
     // loggedIn(newValue) {
     //   if (!this.loggedIn) this.$router.push('/login')
     // },
   },
-  components: { CartGroup },
 }
 </script>
 <style lang="stylus" scoped>
@@ -68,4 +91,20 @@ export default {
       height 30px
       margin-right 10px
       vertical-align bottom
+.footer
+  display flex
+  justify-content space-between
+  padding 44px 0
+  .group-actions
+    span 
+      color green
+      margin  0 20px
+      font-size 14px
+  .group-info
+    font-size 20px
+    span:first-child
+      margin-right 20px
+    .price
+      font-size 24px
+      color red
 </style>

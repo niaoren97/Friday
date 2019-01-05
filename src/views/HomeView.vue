@@ -40,8 +40,7 @@
       .right
         span 更多&gt;&gt;
     .display
-      router-link(:to="{name: 'product', params: {id: item.id}}",v-for="item in fruit", class='todetails' ) 
-        product-classify(:product="item" myclass="product-classify")
+      product-classify(:product="item", myclass="product-classify", v-for="item in fruit", :key="item.id")
 
     .seafood 
       .left 
@@ -51,8 +50,7 @@
       .right
         span 更多&gt;&gt;
     .display
-      router-link(:to="{name: 'product', params: {id: item.id}}", v-for="item in seafood",class='todetails')
-        product-classify(:product="item" myclass="product-classify")
+      product-classify(:product="item", myclass="product-classify", v-for="item in seafood", :key="item.id")
 
     .meat 
       .left 
@@ -62,8 +60,9 @@
       .right
         span 更多&gt;&gt;
     .display
-      router-link(:to="{name: 'product', params: {id: item.id}}", v-for="item in meat",class='todetails') 
-        product-classify(:product="item" myclass="product-classify")
+      product-classify(:product="item", myclass="product-classify", v-for="item in meat", :key="item.id")
+      //- router-link(:to="{name: 'product', params: {id: item.id}}", v-for="item in meat",class='todetails') 
+      //-   product-classify(:product="item" myclass="product-classify")
     .egg 
       .left 
         img(src="/static/logo/egg.png")
@@ -72,8 +71,9 @@
       .right
         span 更多&gt;&gt;
     .display
-      router-link(:to="{name: 'product', params: {id: item.id}}", v-for="item in milk",class='todetails')
-        product-classify(:product="item" myclass="product-classify")
+      product-classify(:product="item", myclass="product-classify", v-for="item in milk", :key="item.id")
+      //- router-link(:to="{name: 'product', params: {id: item.id}}", v-for="item in milk",class='todetails')
+      //-   product-classify(:product="item" myclass="product-classify")
     
 </template>
 <script>

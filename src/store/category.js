@@ -2,16 +2,12 @@ import axios from 'axios'
 export default {
   namespaced: true,
   state: {
-    categories: {}
+    categories: {},
   },
   mutations: {
-    addCategories() {
-
-    }
+    addCategories() {},
   },
   actions: {
-    fetchCategories() {
-      
-    }
-  }
+    fetchCategories() {},
+  },
 }
