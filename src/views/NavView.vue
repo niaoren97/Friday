@@ -38,6 +38,7 @@ export default {
   font-size 16px
   span 
     margin-right 5px 
+    color #666666
 .friday, .mall, .qiang 
   width 1280px
   height 500px

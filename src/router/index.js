@@ -21,6 +21,8 @@ import MeRouter from './me'
 
 import store from '../store'
 
+// 刚的页面路由
+import Fresh from '@/components/about/Fresh.vue'
 // test路由
 // import NavBar from '@/base/NavBar.vue'
 import ChoseAddres from '@/components/common/ChoseAddres.vue'
@@ -44,17 +46,34 @@ const router = new Router({
       component: HomeView,
     },
     // test路由接口
-    { path: '/c', component: ChoseAddres },
+    {
+      path: '/c',
+      component: ChoseAddres,
+    },
 
-    { path: '/login', name: 'login', component: EntryView },
-    { path: '/signup', name: 'signup', component: EntryView },
-    { path: '/retrieve-password', component: EntryView },
+    {
+      path: '/login',
+      name: 'login',
+      component: EntryView,
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: EntryView,
+    },
+    {
+      path: '/retrieve-password',
+      component: EntryView,
+    },
     // 分类商品
     { path: '/category', component: CategoryView },
     { path: '/search', component: SearchResultView, name: 'search' },
     { path: '/product/:id', component: ProductView, name: 'product' },
     // 同城
-    { path: '/city', component: CityView },
+    {
+      path: '/city',
+      component: CityView,
+    },
     // 礼拜五
     { path: '/friday', component: FridayView, name: 'friday' },
     // 积分商城
@@ -70,13 +89,29 @@ const router = new Router({
       name: 'cart',
       requiresAuth: process.env.VUE_APP_STAGE === 'play' ? false : true,
     },
-    { path: '/cart/order/:oid', component: OrderView, name: 'order' },
+    {
+      path: '/cart/order/:oid',
+      component: OrderView,
+      name: 'order',
+    },
     // 导航
     { path: '/nav', component: NavView, name: 'nav' },
     MeRouter,
     // 关于礼拜五
-    { path: '/about', component: AboutView },
-    { path: '*', component: NotFoundView },
+    // 优鲜保障
+    {
+      path: 'fresh',
+      component: Fresh,
+      name: 'fresh',
+    },
+    {
+      path: '/about',
+      component: AboutView,
+    },
+    {
+      path: '*',
+      component: NotFoundView,
+    },
   ],
 })
 
@@ -84,7 +119,12 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   if (to.matched.some((m) => m.meta.requiresAuth)) {
     if (!store.state.user.loggedIn) {
-      next({ path: '/login', query: { redirect: to.fullPath } })
+      next({
+        path: '/login',
+        query: {
+          redirect: to.fullPath,
+        },
+      })
     } else {
       next()
     }

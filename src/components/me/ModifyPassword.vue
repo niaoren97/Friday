@@ -8,8 +8,8 @@ panel(title="修改密码")
     .form-group
       input(placeholder="请再次输入密码确认", v-model="passwordAgain")
     .form-group
-      input(placeholder="验证码", v-model="verifyCode")
-      span TODO:
+      input.self(placeholder="验证码", v-model="verifyCode")
+      Verification
     .form-group.with-button
       input(placeholder="手机验证码", v-model="mobileCode")
       button(@click="getMobileCode", :disabled="countingDown", ref="mobile") 获取验证码
@@ -18,6 +18,7 @@ panel(title="修改密码")
 <script>
 import { mapState } from 'vuex';
 import { clearInterval } from 'timers';
+import Verification from '@/components/common/Verification.vue'
 export default {
   name: 'ModifyPassword',
   data() {
@@ -55,7 +56,8 @@ export default {
     submit() {
 
     }
-  }
+  },
+  components:{Verification}
 }
 </script>
 <style lang='stylus' scoped>
@@ -85,4 +87,9 @@ export default {
     padding 14px
     width 100% 
     height 100%
+  .self
+      width 40%
+  Verification
+    display inline
+    width 50%
 </style>
