@@ -75,6 +75,7 @@ export default {
 .container
   height 200px
   border-top solid 1px #dddddd
+  margin-top 30px
 .content
   margin auto
 .top

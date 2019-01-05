@@ -18,7 +18,8 @@
       hot-sale(myhot="myhot")
       hot-sale(myhot="myhot")
     
-    city-product
+    .city_products
+      city-product.city-product(v-for="(item,key) in seller", :key="item.key", :item="item")
   
     
 </template>
@@ -49,28 +50,69 @@ export default {
           { id: 3, src: '/static/goods/bigposter.png' },
         ],
       },
+      seller:[],
+      products: [
+        {
+          images: ["/static/images/dzx.png"],
+          name: "阳澄湖大闸蟹",
+          current_price: 62,
+          shop_address:"浙江省台州市温岭市人民西路2号"
+        },
+        {
+          images: ["/static/images/dzx.png"],
+          name: "阳澄湖大闸蟹",
+          current_price: 62,
+          shop_address:"浙江省台州市温岭市人民西路2号"
+        },
+        {
+          images: ["/static/images/goods1.png"],
+          name: "阳澄湖大闸蟹",
+          current_price: 62,
+          shop_address:"浙江省台州市温岭市人民西路2号"
+        },
+        {
+          images: ["/static/images/dzx.png"],
+          name: "阳澄湖大闸蟹",
+          current_price: 62,
+          shop_address:"浙江省台州市温岭市人民西路2号"
+        },
+        {
+          images: ["/static/images/goods1.png"],
+          name: "阳澄湖大闸蟹",
+          current_price: 62,
+          shop_address:"浙江省台州市温岭市人民西路2号"
+        },
+        {
+          images: ["/static/images/dzx.png"],
+          name: "阳澄湖大闸蟹",
+          current_price: 62,
+          shop_address:"浙江省台州市温岭市人民西路2号"
+        },
+        {
+          images: ["/static/images/goods2.png"],
+          name: "阳澄湖大闸蟹",
+          current_price: 62,
+          shop_address:"浙江省台州市温岭市人民西路2号"
+        },
+        {
+          images: ["/static/images/dzx.png"],
+          name: "阳澄湖大闸蟹",
+          current_price: 62,
+          shop_address:"浙江省台州市温岭市人民西路2号"
+        }
+      ]
     }
   },
   components: {
     HotSale,
   },
   created() {
-    this.$http.get('/api/home')
-    .then(({data})=> {
-     this.friday= data.friday
+    this.$http.get('/api/city').then(({data})=>{
+      this.seller = data.data
     })
   },
   mounted() {
-    // var mySwiper = new Swiper(".swiper-container", {
-    //   pagination: {
-    //     el: ".swiper-pagination",
-    //     clickable: true
-    //   },
-    //   navigation: {
-    //     nextEl: ".swiper-button-next",
-    //     prevEl: ".swiper-button-prev"
-    //   }
-    // });
+
   },
   computed: {
     swiper() {
@@ -106,5 +148,15 @@ export default {
 .myhot
   float left
   margin-right 20px
+
+.city_products
+  overflow hidden
+  .city-product 
+    float left
+    margin-right 20px
+    margin-top 20px
+    &:nth-child(4n)
+      margin-right 0
+  
 
 </style>
