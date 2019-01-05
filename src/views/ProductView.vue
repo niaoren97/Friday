@@ -36,9 +36,11 @@
         span 件
       .cart
         router-link(:to="{name:'cart'}") 
-          div(class='tianjia', :class='{active_buy:cur==0}', @click='toggle(0), add()') 添加购物车
+          div(class='tianjia', :class='{active_buy:cur==0}', @click='clickCart()') 
+            span(v-if="isInCart") 已添加至购物车
+            span(v-else) 添加购物车
         router-link(:to="{name:'order'}") 
-          div(class='buy', :class='{active_buy:cur==1}', @click='toggle(1), buy()')  购买
+          div(class='buy', :class='{active_buy:cur==1}', @click=' buy()')  购买
       
       .collection(@click='isShow()')
         img(src='/static/products/starts1.png' v-if='show')
@@ -82,16 +84,17 @@
 </template>
 <script>
 import axios from 'axios'
-import Magnifier from "@/components/common/Magnifier.vue";
+import { mapState } from 'vuex'
+import Magnifier from '@/components/common/Magnifier.vue'
 export default {
   components: { Magnifier },
   data() {
     return {
-      details:true,
-      cur:1,
-      show:true,
-      selected:0,
-      num:0,
+      details: true,
+      cur: 1,
+      show: true,
+      selected: 0,
+      num: 0,
       id: 0,
       product: {
         images: [
@@ -99,70 +102,78 @@ export default {
           // "/static/products/goods1.png",
           // "/static/products/goods1.png",
           // "/static/products/goods1.png"
-        ]
-      }
-    };
-  },
-  computed:{
-    poster() {
-      return this.product.images[this.id]
+        ],
+      },
     }
   },
+  computed: {
+    ...mapState({ items: (s) => s.cart.items }),
+    isInCart() {
+      return Object.values(this.items).some(
+        (i) => i.product.id === this.product.id
+      )
+    },
+    poster() {
+      return this.product.images[this.id]
+    },
+  },
   created() {
-    axios.get('/api/products/1')
-    .then(res =>{
+    axios.get('/api/products/1').then((res) => {
       this.product = res.data
     })
   },
   methods: {
     pre() {
-      this.id--;
+      this.id--
       if (this.id < 0) {
-        this.id = this.product.images.length-1;
+        this.id = this.product.images.length - 1
       }
     },
     next() {
-      this.id++;
-      if (this.id > this.product.images.length-1) {
-        this.id = 0;
+      this.id++
+      if (this.id > this.product.images.length - 1) {
+        this.id = 0
       }
     },
     jian() {
-      
-      if(this.num == 0){
-       return this.num = 0;
-      } 
-      this.num--;
+      if (this.num == 0) {
+        return (this.num = 0)
+      }
+      this.num--
     },
     jia() {
-      this.num++;
-    },
-    toggle(n) {
-      this.cur=n;
+      this.num++
     },
     select(n) {
-      this.selected=n;
+      this.selected = n
     },
     isShow() {
-      this.show=!this.show;
+      this.show = !this.show
     },
     togbar(n) {
-      this.cur=n;
+      this.cur = n
     },
     change() {
-      this.details=!this.details;
+      this.details = !this.details
+    },
+    clickCart() {
+      if (!this.isInCart)
+        // return this.$store.dispatch('cart/removeItems', [this.product.id])
+        this.add()
     },
     add() {
-      this.$store.dispatch('cart/addItem',{item: {
-        product: this.product,
-        quantity: this.num,
-        spec: this.product.specs[this.selected],
-        checked: true,
-        seller: this.product.seller
-      }})
-    }
-  }
-};
+      this.$store.dispatch('cart/addItem', {
+        item: {
+          product: this.product,
+          quantity: this.num,
+          spec: this.product.specs[this.selected],
+          checked: true,
+          seller: this.product.seller,
+        },
+      })
+    },
+  },
+}
 </script>
 <style lang='stylus' scoped>
 .product
@@ -175,6 +186,7 @@ export default {
 
     .big
       margin-bottom 40px
+
       img
         width 500px
         height 500px
@@ -205,12 +217,15 @@ export default {
     float right
     width 740px
     height 600px
-    .title 
+
+    .title
       font-size 26px
       margin 20px 0
-    .label 
+
+    .label
       margin-bottom 20px
-      span 
+
+      span
         height 27px
         line-height 27px
         text-align center
@@ -219,26 +234,32 @@ export default {
         display inline-block
         background-color #498e3d
         color #fff
-        font-size 16px 
+        font-size 16px
+
         &:first-child
           margin-left 0
-          background-color #498e3d   
+          background-color #498e3d
+
         &:nth-child(2)
-          background-color #f08200  
+          background-color #f08200
+
     .description
       height 184px
       overflow hidden
       padding 20px 0
-      border-top 1px solid #f2f2f2     
-      border-bottom 1px solid #f2f2f2 
+      border-top 1px solid #f2f2f2
+      border-bottom 1px solid #f2f2f2
+
       .des-left
         float left
         width 118px
         text-align center
         margin-right 30px
-        img 
+
+        img
           width 100px
           height 100px
+
         .zishen
           background-color #ffe313
           border-radius 20px
@@ -246,154 +267,184 @@ export default {
           text-align center
           line-height 32px
           height 32px
+
       .des-right
-        float right 
+        float right
         width 586px
         font-size 16px
         color #737373
         line-height 30px
 
-    .price  
+    .price
       margin 20px 0
       width 344px
+
       span:first-child
         font-size 32px
         color #ff5757
         margin-right 20px
+
       span:last-child
         font-size 16px
         color #737373
         text-decoration line-through
-    .guige 
+
+    .guige
       font-style 20px
       margin-bottom 30px
       color #737373
+
       span
         padding 5px 10px
         margin 0 9px
+
       .active_border
         border 1px solid #4b943d
+
     .number
       display inline-block
       margin-right 40px
       margin-bottom 40PX
       font-size 20px
       color #737373
-      span 
+
+      span
         display inline-block
         border 1px solid #737373
         padding 5px
         text-align center
+
         &:first-child
           margin-left 20px
+
         &:last-child
           border 0
           padding 0
           margin-left 5px
-      .jian,.jia
+
+      .jian, .jia
         width 35px
-        height 35px   
-        background-color #f2f2f2    
-      .num 
+        height 35px
+        background-color #f2f2f2
+
+      .num
         border-right 0
         border-left 0
-        width 100px 
-        background-color #fff 
-    .cart 
+        width 100px
+        background-color #fff
+
+    .cart
       margin-bottom 40PX
       display inline-block
-      
-      .tianjia,.buy
-        &:hover 
+
+      .tianjia, .buy
+        &:hover
           background-color #f08200
+
         display inline-block
         margin 0 10px
         border-radius 5px
         width 150px
         height 50px
-        line-height 50px 
+        line-height 50px
         text-align center
         color #fff
         background-color #ffae4f
+
       .active_buy
         background-color #f08200
+
     .collection
       display inline-block
+
       span
         vertical-align bottom
         color #484848
         font-size 16px
-      img 
+
+      img
         vertical-align middle
         margin-right 10px
+
     .share
       display inline-block
-      margin-left  40px
+      margin-left 40px
       font-size 16px
       color #484848
-      img 
+
+      img
         width 30px
-        height 30px 
+        height 30px
         margin 0 5px
         vertical-align middle
 
-  // -------------------- 商品详情&评价 ------------------------
-.tabbar 
+.tabbar
   background-color #f4f4f4
   margin-bottom 20px
-  span 
+
+  span
     display inline-block
     height 40px
     line-height 40px
     padding 0 10px
+
   .cur_bar
     background-color #fff
-    color green 
+    color green
     border-top 1px solid green
-  
-.details 
-  .details_title 
+
+.details
+  .details_title
     font-size 25px
     color #ec6a17
     margin-bottom 20px
+
   .details_description
     font-size 16px
     color #adadad
     line-height 22px
-  img 
+
+  img
     width 1200px
-    height 265px   
+    height 265px
     margin 10px 0
 
 .comments
   padding 20px 0
   border-bottom 1px solid #f2f2f2
   overflow hidden
+
   .comments_left
     float left
-    .avatar 
+
+    .avatar
       margin-right 30px
-      img 
+
+      img
         width 100px
         height 100px
+
       .phone
         font-size 16px
+
   .comments_right
-    float-right 
+    float-right
     padding 0 20px
+
     .starts
       overflow hidden
-      img 
+
+      img
         margin 0 2px
+
       .time
         float right
+
     .comment
       font-size 16px
       margin 5px 0
-    .pictuers
-      img 
-        margin 0 1px
-    
-          
 
+    .pictuers
+      img
+        margin 0 1px
 </style>

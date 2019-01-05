@@ -33,7 +33,7 @@ export default {
   watch: {
     loggedIn() {
       if(!this.loggedIn) {
-        this.$router.push('/')
+        this.$router.push('/login')
       }
     }
   }

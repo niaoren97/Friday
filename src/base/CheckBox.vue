@@ -1,5 +1,5 @@
 <template lang="pug">
-.check-box(@click="$emit('input', !value)", :class="{checked: value}")
+.check-box(@click="$emit('input', !value); $emit('click')", :class="{checked: value}")
   .inner(v-show="value")
 </template>
 <script>

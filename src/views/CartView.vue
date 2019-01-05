@@ -1,6 +1,6 @@
 <template lang="pug">
 .content.cart-view
-  .main(v-if="items.length===0")
+  .main(v-if="Object.keys(items).length===0")
     p 你还没有商品
   .main(v-else)
     .logo
@@ -10,29 +10,47 @@
     
 </template>
 <script>
-import { mapState } from "vuex";
-import { groupBy } from "lodash";
-import CartGroup from "@/components/cart/CartGroup.vue";
+import { mapState } from 'vuex'
+import { groupBy } from 'lodash'
+import CartGroup from '@/components/cart/CartGroup.vue'
 
 export default {
-  name: "CartView",
+  name: 'CartView',
   computed: {
-    ...mapState({ items: s => s.cart.items }),
+    ...mapState({
+      items: (s) => s.cart.items,
+    }),
+
+    loggedIn() {
+      return this.$store.state.user.loggedIn
+    },
     // 根据商品的店铺分类,不同店铺的商品分别分组.
     groups() {
       // return items grouped by seller
-      return (groupBy(this.items, item => item.seller.id));
-    }
+      return groupBy(this.items, (item) => item.seller.id)
+    },
   },
   data() {
-    return {
-      // items: [
-      //   1
-      // ]
-    };
+    return {}
   },
-  components: { CartGroup }
-};
+  created() {
+
+      if(!this.loggedIn) {
+        this.$router.push('/login')
+      }
+  },
+  watch: {
+    loggedIn() {
+      if(!this.loggedIn) {
+        this.$router.push('/login')
+      }
+    }
+    // loggedIn(newValue) {
+    //   if (!this.loggedIn) this.$router.push('/login')
+    // },
+  },
+  components: { CartGroup },
+}
 </script>
 <style lang="stylus" scoped>
 .cart-view
@@ -40,13 +58,14 @@ export default {
 
 .main
   min-height 490px
-  .logo 
+
+  .logo
     font-size 20px
     margin-bottom 20px
-    img 
+
+    img
       width 30px
       height 30px
       margin-right 10px
       vertical-align bottom
-    
 </style>

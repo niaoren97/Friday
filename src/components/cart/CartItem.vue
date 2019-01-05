@@ -1,72 +1,51 @@
 <template lang='pug'>
 tr.item
   td.one 
-    check-box 
+    check-box(v-model="item.checked", @click="toggle") 
     img(:src="item.product.images[0]")
     span.digest {{item.product.digest}}
   td {{item.spec.quantity}}个装
   td ￥{{item.spec.current_price}}
   td 
-    span.jian(@click='jian()') -
-    span.number {{number}}
-    span.jia(@click="jia()") +
+    button.jian(@click='alter({id: item.id, change: -1})', :disabled="item.quantity<=0") -
+    span.number {{item.quantity}}
+    button.jia(@click="alter({id: item.id, change: 1})") +
   td
-    span.sum {{sum}}
+    span.sum {{sum | currency('cn')}}
   td 
     span.del(@click="del()") 删除
  
   
 </template>
 <script>
-import CheckBox from "@/base/CheckBox.vue";
+import CheckBox from '@/base/CheckBox.vue'
+import { mapActions } from 'vuex'
 export default {
   components: { CheckBox },
-  props: ["item"],
+  props: ['item'],
   data() {
     return {
-      number: 1
-      // sum: 0,
-      // products: {
-      //   images: ["/static/goods/i1.png","/static/goods/i1.png"],
-      //   digest: "云南蒙自石榴8个装",
-      //   specs: [
-      //     {
-      //       quantity: 8,
-      //       original_price: 188
-      //     }
-      //   ]
-      // }
-    };
+      // number: 1
+    }
   },
   methods: {
-    jian() {
-      if (this.number == 0) {
-        return (this.number = 0);
-      }
-      this.number--;
-      this.$store.dispatch('cart/addItem', {item: {
-        quantity: this.num,
-      }})
-      // this.sum = this.number*this.item.product.specs[0].original_price;
-    },
-    jia() {
-      this.number++;
-      // this.sum = this.number*this.item.product.specs[0].original_price;
-      this.$store.dispatch('cart/addItem', {item: {
-        quantity: this.num,
-      }})
+    ...mapActions({ alter: 'cart/alterItem' }),
+    toggle() {
+      this.$store.commit('cart/setChecked', {
+        id: this.item.id,
+        checked: !this.item.checked,
+      })
     },
     del() {
-      this.$store.dispatch("cart/removeItems", [this.item.id]);
-    }
+      this.$store.dispatch('cart/removeItems', [this.item.id])
+    },
   },
   computed: {
     sum: function() {
-      return (this.sum =
-        this.number * this.item.spec.current_price);
-    }
-  }
-};
+      return (this.item.quantity * this.item.spec.current_price).toFixed(2)
+    },
+  },
+}
 </script>
 <style lang='stylus' scoped>
 table.f-table
@@ -103,6 +82,8 @@ table.f-table
         height 30px
         line-height 30px
         text-align center
+        border none
+        outline none
         background-color #f2f2f2
         border 1px solid #f2f2f2
 
