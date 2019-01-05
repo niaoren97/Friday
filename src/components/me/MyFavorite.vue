@@ -20,7 +20,7 @@ export default {
         digest: '花蜜般的甘甜百吃不厌', name: '新西兰佳沛黄金奇异果', original_price: 32,current_price: 20,
         }, },
         {id: 2, product: {images: ['/static/goods/i2.png'], status: 1,
-        digest: '花蜜般的甘甜百吃不厌', name: '新西兰佳沛黄金奇异果', original_price: 32,current_price: 20,
+        digest: '花蜜般的甘甜百吃不厌呜呜呜呜呜呜呜呜无无无无', name: '新西兰佳沛黄金奇异果', original_price: 32,current_price: 20,
         }, },
         {id: 3, product: {images: ['/static/goods/i3.png'], status: 1,
         digest: '真好吃呀', name: '伊朗猕猴桃', original_price: 32,current_price: 20,

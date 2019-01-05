@@ -1,7 +1,7 @@
 <template lang="pug">
 product-base(:product="product")
   template(slot="description")
-    span {{product.digest}}
+    .description {{product.digest}}
     .price 
       span.current_price.one ${{product.current_price}}
       span.original_price.two ${{product.original_price}}
@@ -19,6 +19,10 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+.description
+  overflow hidden
+  white-space nowrap
+  text-overflow ellipsis
 .price 
   .current_price.one
     font-size 20px

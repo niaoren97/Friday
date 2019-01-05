@@ -17,17 +17,37 @@ panel
           th 备注
           th 操作
       tbody
-        tr(v-for="a in me.addresses", :key="a.id")
+        //- 顶部默认地址
+        tr
+          td {{topAddress.contact}}
+          td {{area(topAddress)}}
+          td {{topAddress.detail}}
+          td {{topAddress.mobile}}
+          td {{topAddress.note}}
+          td
+            span 修改 
+            span 删除
+            //- 其他地址
+        //- tr(v-for="a in me.addresses", :key="a.id") 
+        //-   td {{otherAddress.contact}}
+        //-   td {{area(otherAddress)}}
+        //-   td {{otherAddress.detail}}
+        //-   td {{otherAddress.mobile}}
+        //-   td {{otherAddress.note}}
+        //-   td
+        //-     span.default(@click="setDefault(a.id)") 设为默认地址 
+        //-     span 修改 
+        //-     span 删除
+            
+        tr(v-for="a in otherAddress", :key="a.id") 
           td {{a.contact}}
           td {{area(a)}}
           td {{a.detail}}
           td {{a.mobile}}
           td {{a.note}}
-          td(v-if="me.defaultAddress === a.id") 
-            span 修改 
-            span 删除
-          td(v-else)
-            span.default 设为默认地址 
+        
+          td
+            span.default(@click="setDefault(a.id)") 设为默认地址 
             span 修改 
             span 删除
 
@@ -39,13 +59,13 @@ export default {
   data() {
     return {
       me: {
-        defaultAddress: 2,
+        defaultAddress: 1,
         addresses: [
           {
             id: 1,
             contact: 'ddd',
             detail: 'sdkfjksdjfksjd',
-            note: '家里的地址',
+            note: '家里的地址1',
             province: 'ksdjf',
             region: 'sdf',
             city: 'sdfs',
@@ -55,7 +75,7 @@ export default {
             id: 2,
             contact: 'ddd',
             detail: 'sdkfjksdjfksjd',
-            note: '家里的地址',
+            note: '家里的地址2',
             province: 'ksdjf',
             region: 'sdf',
             city: 'sdfs',
@@ -65,7 +85,7 @@ export default {
             id: 3,
             contact: 'ddd',
             detail: 'sdkfjksdjfksjd',
-            note: '家里的地址',
+            note: '家里的地址3',
             province: 'ksdjf',
             region: 'sdf',
             city: 'sdfs',
@@ -77,6 +97,12 @@ export default {
   },
   computed: {
     // ...mapState({me: s=>s.user.me})
+    topAddress: function() {
+      return this.me.addresses.find(a => a.id === this.me.defaultAddress)
+    },
+    otherAddress: function() {
+       return this.me.addresses.filter(a => a.id !== this.me.defaultAddress)
+    }
   },
   methods: {
     area(addr) {
@@ -84,6 +110,9 @@ export default {
     },
     addAddress() {
 
+    },
+    setDefault(n) {
+       this.me.defaultAddress = n;
     }
   }
 }
@@ -120,7 +149,7 @@ export default {
     td:nth-child(5)
       width 100px
     span
-      text-decoration underline 
+      // text-decoration underline 
       color green
       padding 0 2px
     span.default
