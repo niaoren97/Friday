@@ -25,7 +25,7 @@ export default {
 .product
   img
     width 305px
-    height 305px
+    height 250px
     background-color #f8f6f7
 
 .txt

@@ -1,14 +1,14 @@
 <template lang='pug'>
 .cityproduct
   .item
-    img.pic(:src="item.images")
+    img.pic(:src="item.logo")
     .txt
       .title {{item.name}}
       .des 
         //- .start
         //-   img(src="/static/products/light_start.png")
-        span {{item.current_price}}/人
-      .shop_address {{item.shop_address}}
+        span {{rand(60,100)}}/人
+      .shop_address {{item.addresses[0].detail}}
 </template>
 <script>
 export default {
@@ -23,6 +23,11 @@ export default {
     //     }
     //   ]
     // };
+  },
+  methods: {
+    rand(x,y) {
+      return Math.floor(Math.random()*(y-x+1)+(x))
+    }
   },
   props:['item']
 };
