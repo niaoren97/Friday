@@ -54,8 +54,8 @@
 
         //- -------------------商品详情&评价 ----------------------
   .tabbar
-    span(:class='{cur_bar:cur==0}', @click='togbar(0), change()') 商品详情
-    span(:class='{cur_bar:cur==1}', @click='togbar(1), change()') 商品评价
+    span(:class='{cur_bar:cur==0}', @click='togbar(0), change()') 商品评价
+    span(:class='{cur_bar:cur==1}', @click='togbar(1), change()') 商品详情
   .details(v-if='details==true')
     .details_title {{product.name}} 
     .details_description {{product.detail}}
