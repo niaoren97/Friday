@@ -100,7 +100,7 @@ export default {
 
 .swiper-slide img
   width 100vw
-  height 500px
+  height 400px
 
 .mall_products
   overflow hidden
