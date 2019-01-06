@@ -28,16 +28,6 @@ panel
             span 修改 
             span 删除
             //- 其他地址
-        //- tr(v-for="a in me.addresses", :key="a.id") 
-        //-   td {{otherAddress.contact}}
-        //-   td {{area(otherAddress)}}
-        //-   td {{otherAddress.detail}}
-        //-   td {{otherAddress.mobile}}
-        //-   td {{otherAddress.note}}
-        //-   td
-        //-     span.default(@click="setDefault(a.id)") 设为默认地址 
-        //-     span 修改 
-        //-     span 删除
             
         tr(v-for="a in otherAddress", :key="a.id") 
           td {{a.contact}}
@@ -45,7 +35,6 @@ panel
           td {{a.detail}}
           td {{a.mobile}}
           td {{a.note}}
-        
           td
             span.default(@click="setDefault(a.id)") 设为默认地址 
             span 修改 
