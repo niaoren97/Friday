@@ -48,22 +48,22 @@ const router = new Router({
     // test路由接口
     {
       path: '/c',
-      component: ChoseAddres
+      component: ChoseAddres,
     },
 
     {
       path: '/login',
       name: 'login',
-      component: EntryView
+      component: EntryView,
     },
     {
       path: '/signup',
       name: 'signup',
-      component: EntryView
+      component: EntryView,
     },
     {
       path: '/retrieve-password',
-      component: EntryView
+      component: EntryView,
     },
     // 分类商品
     { path: '/category', component: CategoryView },
@@ -72,7 +72,7 @@ const router = new Router({
     // 同城
     {
       path: '/city',
-      component: CityView
+      component: CityView,
     },
     // 礼拜五
     { path: '/friday', component: FridayView, name: 'friday' },
@@ -92,7 +92,7 @@ const router = new Router({
     {
       path: '/cart/order/:oid',
       component: OrderView,
-      name: 'order'
+      name: 'order',
     },
     // 导航
     { path: '/nav', component: NavView, name: 'nav' },
@@ -102,17 +102,16 @@ const router = new Router({
     {
       path: 'fresh',
       component: Fresh,
-      name: 'fresh'
+      name: 'fresh',
     },
     {
       path: '/about',
-      component: AboutView
+      component: AboutView,
     },
     {
       path: '*',
-      component: NotFoundView
+      component: NotFoundView,
     },
-
   ],
 })
 
@@ -123,8 +122,8 @@ router.beforeEach((to, from, next) => {
       next({
         path: '/login',
         query: {
-          redirect: to.fullPath
-        }
+          redirect: to.fullPath,
+        },
       })
     } else {
       next()
